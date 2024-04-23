@@ -1,70 +1,329 @@
-# Getting Started with Create React App
+# Project Title
+ClothesLine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+ClothesLine lets you connect with your friends and share clothing.
 
-## Available Scripts
+### Problem
+- as living spaces become more compact
+- focus on sustainability and not producing waste
+- economical
+- community-building
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- Third-wave coffee is coffee made with high-quality beans typically sourced from individual farms and roasted more lightly to bring out their distinctive flavors. There is no certain way to know the quality of a café's coffee before purchasing and having your first sip. When looking for a third-wave café in a given area, people generally have to go through the time-consuming process of doing a Google search for coffee near a location then manually analyze images, reviews, etc. for each café before deciding if it might be a café serving a high-quality cup of third-wave coffee. -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### User Profile
+Friends and small communities
+- People who want to cut down on their warddrobe without cutting down on their options
+- Enjoys wearing different things / trying new styles
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Features
+- As a logged in user, I want to easily upload pieces to my online wardrobe
+    - Name (text input), type (select), color (select), size (select) --> should be dynamic depending on type
+- As a logged in user, I want to connect with friends' accounts
+- As a logged in user, I want to see my friends' online wardrobes
+- As a logged in user, I want to search for items within my community according to parameters (same as above in uploading)
 
-### `npm test`
+## Implementation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tech Stack
+- React
+- JavaScript
+- MySQL
+- Express
+- Client libraries: 
+    - react
+    - react-router
+    - axios
+- Server libraries:
+    - knex
+    - express
+    - multer
 
-### `npm run build`
+### APIs
+- No external APIs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Sitemap
+- Register
+- Login
+- User Dashboard
+- Item pages
+    - browse all items
+    - see results based on search queries
+- Closet pages (closet-specific item pages)
+    - Personal closet
+    - Friend's closet
+- Friend/Closet list (list of friends that links to their wardrobe)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Mockups
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Dashboard Page
+![](./images/dashboard.jpeg)
 
-### `npm run eject`
+#### My Closet Page / Add Item Page
+![](./images/my-closet.jpeg)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Browse Closet Page
+![](./images/search-browse.jpeg)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Search Form
+![](./images/search-form.jpg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Data
 
-## Learn More
+![](./images/sql-flowchart.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**GET /items**
+- Get a list of items
+Parameters:
+- user id?
+- JWD token
 
-### Code Splitting
+Optional query parameters (for search):
+- type, colour, size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Response: 
+```
+[
+    {
+        "id":1,
+        "username": "user123"
+        "type": "shoes",
+        "colour": "black",
+        "size": "9",
+        "image": "image.jpg",
+    },
+    {
+        "id":46,
+        "username": "otherUser"
+        "type": "shoes",
+        "colour": "black",
+        "size": "9",
+        "image": "image.jpg",
+    },
+    ...
+]
+```
 
-### Analyzing the Bundle Size
+**GET /items/:itemId**
+- Get an item's details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Parameters:
+- item id
 
-### Making a Progressive Web App
+Response:
+```
+{
+    "id":1,
+    "type": "shoes",
+    "colour": "black",
+    "size": "9/41",
+    "image": "image.jpg",
+}
+```
+If id not found, 404. If successful, 201.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**POST /items**
+- Add an item to your closet
 
-### Advanced Configuration
+Parameters:
+- user id
+- JWT token
+- type
+- colour
+- size
+- photo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Response:
+```
+{
+    "id": 1,
+    "type": "jacket",
+    "colour": "red",
+    "size": "M/8/28",
+    "image": "image.jpg",
+}
+```
 
-### Deployment
+**GET /users***
+- Get all users
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Response body:
+```
+[
+    {
+        "id": 1,
+        "username": "user123",
+        "email": "user@email.com",
+    },
+    {
+        "id", 2,
+        "username": "user456",
+        "email": "best_user@email.com"
+    },
+    ...
+]
+```
 
-### `npm run build` fails to minify
+**GET /users/:userId**
+- Get user's information/profile; used in tandem with /:userId/items endpoint to display a user's closet
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Parameters:
+- user id
+
+Response:
+```
+{
+    "id": 1,
+    "username": "user123", 
+    "email":"user@email.com",
+}
+```
+
+**GET /users/:userId/items**
+
+- Get user's closet (list of items associated with that user id)
+
+Parameters:
+- user id
+- JWT token
+
+Response:
+```
+[
+    {
+        "id":1,
+        "username": "user123"
+        "type": "shoes",
+        "colour": "black",
+        "size": "9",
+        "image": "image.jpg"
+    },
+    {
+        "id":2,
+        "username": "user123"
+        "type": "earrings",
+        "colour": "gold",
+        "size": "N/A",
+        "image": "image.jpg"
+    },
+    ...
+]
+```
+
+**POST /register**
+
+- Add a user account
+
+Parameters:
+- username: User chosen display name
+- email: User's email
+- password: User's provided password
+
+Response:
+```
+{
+    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+}
+```
+
+**POST /login**
+
+- Login a user
+
+Parameters:
+- email: User's email
+- password: User's provided password
+
+Response:
+```
+{
+    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+}
+```
+
+
+### Auth
+
+- JWT auth
+    - Before adding auth, all API requests will be using a fake user with id 1
+    - Added after core features have first been implemented
+    - Store JWT in localStorage, remove when a user logs out
+
+
+## Roadmap
+
+- Create client
+    - react project with routes and boilerplate pages
+
+- Create server
+    - express project with routing, with placeholder 200 responses
+
+- Create migrations
+
+- Create seeds for:
+    - users
+    - clothing items
+    - closets
+    - friendships - include at least one sample friendship between two users
+
+- Deploy client and server projects so all commits will be reflected in production
+
+- Feature: Get user by id
+    - Create GET /users/:userId endpoint
+    - Implement basic structure of user profile (closet page)
+
+- Feature: Get items
+    - Create GET /items endpoint
+    - Implement browse/explore page (list of all items)
+        - ItemsList component
+        - Item component
+
+- Feature: View item
+    - Implement item details page
+    - Link to existing Item component
+    - Create GET /items/:itemId endpoint
+
+- Feature: Get items by user id
+    - Create GET /users/:userId/items endpoint
+    - Reuse ItemsList component in user profile
+
+- Feature: Add item
+    - Implement Add Item page/form
+    - Create POST /items endpoint
+
+- Feature: Dashboard
+    - Links to:
+        - Search form (search items)
+        - Explore page (all items) 
+        - My closet (user's items)
+        - Add item (to user's own closet)
+
+- Feature: Create account
+    - Implement register page + form
+    - Create POST /users/register endpoint
+
+- Feature: Login
+    - Implement login page + form
+    - Create POST /users/login endpoint
+
+- Feature: Implement JWT tokens
+    - Server: Update expected requests / responses on protected endpoints
+    - Client: Store JWT in local storage, include JWT on axios calls
+
+- Feature: Friends page
+    - Implement friend list page (links to friends' closets)
+    - Create GET /users endpoint
+
+- Bug fixes
+
+- DEMO DAY
+
+## Nice-to-haves
+
+- Integrate adding friends (seeded in first sprint)
+- Forgot password functionality

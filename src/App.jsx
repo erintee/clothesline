@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header/Header';
+import ExplorePage from './pages/ExplorePage/ExplorePage';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
           <Route path='/search'></Route>
 
           {/* Items List */}
-          <Route path='/items'></Route>
+          <Route path='/items' element={<ExplorePage/>}></Route>
 
           {/* List friends' closets */}
           <Route path='/closets'></Route>

@@ -14,8 +14,8 @@ function App() {
           {/* Home Page */}
           <Route path='/'></Route>
 
-          {/* My Closet */}
-          <Route path='/closets/myCloset'></Route>
+          {/* My Closet
+          <Route path='/closets/myCloset'></Route> */}
 
           {/* Add item to my closet */}
           <Route path='/add'></Route>
@@ -29,7 +29,7 @@ function App() {
           {/* List friends' closets */}
           <Route path='/closets'></Route>
 
-          {/* Closet */}
+          {/* ClosetPage - have conditional statement for render in page element (friend vs own) */}
           <Route path='/closets/:userId'></Route>
         </Routes>
       </BrowserRouter>

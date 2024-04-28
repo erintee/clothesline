@@ -15,8 +15,8 @@ function App() {
           {/* Home Page */}
           <Route path='/'></Route>
 
-          {/* My Closet
-          <Route path='/closets/myCloset'></Route> */}
+          {/* ClosetPage - have conditional statement for render in page element (friend vs own) */}
+          <Route path='/closets/:userId' element={<ClosetPage />}></Route>
 
           {/* Add item to my closet */}
           <Route path='/add'></Route>
@@ -30,8 +30,6 @@ function App() {
           {/* List friends' closets */}
           <Route path='/closets'></Route>
 
-          {/* ClosetPage - have conditional statement for render in page element (friend vs own) */}
-          <Route path='/closets/:userId' element={<ClosetPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

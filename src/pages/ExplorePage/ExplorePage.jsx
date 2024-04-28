@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import ItemList from "../../components/ItemList/ItemList";
+import ItemList from "../../components/ItemList/ItemList";
 import Item from '../../components/Item/Item';
 import { BASE_URL } from '../../utils/utils';
 import './ExplorePage.scss';
@@ -27,16 +27,9 @@ const ExplorePage = () => {
         return<>Loading...</>
     }
     return (
-        <>
-        {data.map((item)=> {
-            return(    
-                <Item
-                    key={item.id}
-                    item={item}
-                />
-            )
-        })}
-        </>
+        <ItemList 
+            data={data}
+        />
     )
 }
 

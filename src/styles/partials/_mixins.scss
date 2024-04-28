@@ -1,0 +1,94 @@
+@use "./variables" as *;
+
+// Media queries
+@mixin tablet {
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+// Typography
+// Mobile
+@mixin m-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+@mixin m-subheader {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+@mixin m-body {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: 400;
+}
+
+@mixin m-label {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+// Tablet and Desktop
+@mixin td-header {
+    font-size: 2.06rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+}
+
+@mixin td-subheader {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 600;
+}
+
+@mixin td-body {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+@mixin td-label {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+// Desktop width and centre
+@mixin desk-width {
+    max-width: $desk-max-width;
+    margin: 0 auto;
+}
+
+// Element styles
+@mixin m-formfield {
+    height: 2.25rem;
+    min-width: 240px;
+    max-width: 100%;
+    border-radius: 4px;
+    padding: 0.75rem;
+    border: 1px solid $bf-mercury;
+    background-color: $bf-alabaster;
+
+    &::placeholder {
+        color: $black;
+    }
+}
+
+@mixin td-formfield {
+    height: 2.5rem;
+    padding: 1rem;
+}

@@ -1,0 +1,15 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    
+    @include tablet {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+    }
+}

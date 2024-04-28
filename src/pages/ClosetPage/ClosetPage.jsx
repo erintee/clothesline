@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 import ItemList from "../../components/ItemList/ItemList";
+import "./ClosetPage.scss";
 
 const ClosetPage = () => {
     const [ items, setItems ] = useState([]);
@@ -16,7 +17,7 @@ const ClosetPage = () => {
         }
 
         fetchUserItems();
-    }, []);
+    }, [userId]);
 
     useEffect (() => {
         const fetchUserName = async () => {
@@ -26,7 +27,7 @@ const ClosetPage = () => {
         }
 
         fetchUserName();
-    }, []);
+    }, [userId]);
 
     return (
         <div className="closet">

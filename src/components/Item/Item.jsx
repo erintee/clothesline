@@ -1,9 +1,8 @@
 import './Item.scss';
 
 const Item = ({item}) => {
-    console.log(item);
 
-    console.log(`http://localhost:8080/${item.image}`)
+    // console.log(`http://localhost:8080/${item.image}`)
     return (
         <div className='item'>
             <div className='item__image-container'>

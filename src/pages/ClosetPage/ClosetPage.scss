@@ -1,0 +1,17 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.closet {
+    margin-top: 1rem;
+    
+    &__header {
+        padding: 0 1rem;
+    }
+    
+    &__title {
+        display: inline-block;
+        @include m-header;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $teal;
+    }
+}

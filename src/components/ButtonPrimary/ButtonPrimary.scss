@@ -1,0 +1,24 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.primary-button {
+    border: 1px solid $teal;
+    background-color: $teal;
+    border-radius: 4px;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    padding: 0.25rem;
+    @include m-label;
+    cursor: pointer;
+
+    @include tablet {
+        flex-grow: unset;
+        width: 120px;
+    }
+
+    &:active {
+        background-color: white;
+        color: $teal;
+    }
+}

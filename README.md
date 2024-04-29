@@ -13,11 +13,9 @@ Friends and small communities
 - Enjoys wearing different things / trying new styles
 
 ### Features
-- As a logged in user, I want to easily upload pieces to my online wardrobe
-    - Name (text input), type (select), color (select), size (select) --> should be dynamic depending on type
-- As a logged in user, I want to connect with friends' accounts
-- As a logged in user, I want to see my friends' online wardrobes
-- As a logged in user, I want to search for items within my community according to parameters (same as above in uploading)
+- As a logged in user, I want to easily add clothing items to my online closet
+- As a logged in user, I want to connect with friends' accounts to see their closets
+- As a logged in user, I want to search for items within my community according to parameters
 
 ## Implementation
 
@@ -41,12 +39,12 @@ Friends and small communities
 ### Sitemap
 - Register
 - Login
-- User Dashboard
+- User Dashboard ?
 - Item pages
     - browse all items
     - see results based on search queries
-- Closet pages (closet-specific item pages)
-    - Personal closet
+- Closet pages (user-specific item pages)
+    - My Closet (with Add Item page)
     - Friend's closet
 - Friend/Closet list (list of friends that links to their wardrobe)
 
@@ -262,7 +260,6 @@ Response:
 - Create seeds for:
     - users
     - clothing items
-    - closets
     - friendships - include at least one sample friendship between two users
 
 - Deploy client and server projects so all commits will be reflected in production
@@ -319,5 +316,6 @@ Response:
 
 ## Nice-to-haves
 
-- Integrate adding friends (seeded in first sprint)
+- Implement requesting items from friends 
+- Implement adding friends (seeded in first sprint)
 - Forgot password functionality

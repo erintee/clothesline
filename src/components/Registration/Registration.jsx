@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './Registration.scss';
-import ButtonPrimary from '../../components/ButtonPrimary';
+import { BASE_URL } from '../../utils/utils';
+import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
+import ButtonSecondary from '../ButtonSecondary/ButtonSecondary';
 import FormError from '../../components/FormError/FormError';
 
-const Registration = ({ isLoggedIn, setIsLoggedIn, setIsSignedUp }) => {
+const Registration = ({ setIsRegistered }) => {
     const [ firstName, setFirstName ] = useState("");
     const [ lastName, setLastName ] = useState("");
     const [ email, setEmail ] = useState("");
@@ -36,15 +38,15 @@ const Registration = ({ isLoggedIn, setIsLoggedIn, setIsSignedUp }) => {
                     "password": password,
                 }
                 
-                // const response = await axios.post(`${BASE_URL}/signup`, newUser);
+                const response = await axios.post(`${BASE_URL}/auth/register`, newUser);
 
                 if(response.data.success) {
-                    console.log("Successfully signed up")
-                    setIsSignedUp(true);
+                    console.log("Successfully signed up");
+                    setIsRegistered(true);
                 }
 
             } catch (error) {
-                
+                console.error("Registration failed: ", error);
             }
         }
     };
@@ -114,7 +116,7 @@ const Registration = ({ isLoggedIn, setIsLoggedIn, setIsSignedUp }) => {
                 
                 <p className='registration__login'>Already have an account?</p>
                 <ButtonSecondary
-                    onClick={setIsSignedUp(true)}
+                    onClick={setIsRegistered(true)}
                 >Login</ButtonSecondary>
 \            </form>
         </div>    

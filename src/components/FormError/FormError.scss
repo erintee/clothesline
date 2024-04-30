@@ -1,0 +1,23 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.input-error {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0;
+    height: 1.25rem;
+    
+    &__icon {
+        display: block;
+        height: 14px;
+        width: 14px;
+    }
+
+    &__message {
+        @include m-body;
+        color: $bittersweet;
+        margin-left: 0.25rem;
+    }
+}

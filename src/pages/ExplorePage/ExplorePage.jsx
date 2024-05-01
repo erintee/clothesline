@@ -19,7 +19,13 @@ const ExplorePage = () => {
 
     const fetchData = useCallback( async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/items?${queryStr}`)
+            const token = localStorage.getItem("authToken");
+            const response = await axios.get(`${BASE_URL}/items?${queryStr}`, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setData(response.data);
         } catch (error) {
             console.error("Unable to retrieve data", error)
@@ -65,8 +71,8 @@ const ExplorePage = () => {
         <div className='filter'>
             <button className='filter-button' onClick={handleShowFilters}>
                 {isFilterVisible ? 
-                <img src={filterIcon} className='filter-button__image filter-button__image--up' /> :
-                <img src={filterIcon} className='filter-button__image' />
+                <img src={filterIcon} className='filter-button__image filter-button__image--up' alt="filter icon"/> :
+                <img src={filterIcon} className='filter-button__image' alt="filter icon"/>
                 }
                 {isFilterVisible ? "Hide Filters" : "Show Filters"}
             </button>

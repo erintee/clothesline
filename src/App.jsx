@@ -9,10 +9,10 @@ import ExplorePage from './pages/ExplorePage/ExplorePage';
 import ClosetPage from './pages/ClosetPage/ClosetPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import AddItemPage from './pages/AddItemPage/AddItemPage';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(!!localStorage.getItem("authToken"));
-  console.log(isLoggedIn)
   const [ user, setUser ] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ function App() {
       const fetchUser = async () => {
           try {
               const token = localStorage.getItem("authToken");
-              console.log(token);
               const response = await axios.get(`${BASE_URL}/dashboard`, {
                   headers: {
                       Authorization: `Bearer ${token}`,
@@ -62,10 +61,13 @@ function App() {
           </Route>
 
           {/* Add item to my closet */}
-          <Route path='/add'></Route>
+          <Route path='/add' element={isLoggedIn ?
+            <AddItemPage user={user} /> :
+            <AuthPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
+          </Route>
 
           {/* Items List */}
-          <Route path='/items' element={isLoggedIn ? 
+          <Route path='/explore' element={isLoggedIn ? 
             <ExplorePage user={user}/> :
             <AuthPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} >
           </Route>

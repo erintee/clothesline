@@ -1,18 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 import ItemList from "../../components/ItemList/ItemList";
 import "./ClosetPage.scss";
+import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 
-const ClosetPage = () => {
+const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
     const [ userName, setUserName ] = useState("");
     const { userId } = useParams();
+    const token = localStorage.getItem("authToken");
+    const navigate = useNavigate();
 
     useEffect (() => {
         const fetchUserItems = async () => {
-            const response = await axios.get(`${BASE_URL}/users/${userId}/items`);
+            const response = await axios.get(`${BASE_URL}/users/${userId}/items`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
             setItems(response.data);
         }
 
@@ -33,6 +42,7 @@ const ClosetPage = () => {
         <div className="closet">
             <section className="closet__header">
                 <h1 className="closet__title">{userName}'s Closet</h1>
+                {Number(userId) === user.id ? <ButtonPrimary clickHandler={() => navigate("/add")}>Add item</ButtonPrimary> : <></>}
             </section>
             <ItemList
                 data={items}

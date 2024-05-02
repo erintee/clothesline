@@ -7,6 +7,7 @@ import { BASE_URL } from '../../utils/utils';
 import './ExplorePage.scss';
 import filterIcon from '../../assets/icons/filter-icon.svg';
 import ButtonSecondary from '../../components/ButtonSecondary/ButtonSecondary';
+import ItemDetailsModal from '../../components/ItemDetailsModal/ItemDetailsModal';
 
 const ExplorePage = () => {
     const [ data, setData ] = useState([]);
@@ -16,6 +17,19 @@ const ExplorePage = () => {
     const [ size, setSize ] = useState("");
     const [ queryStr, setQueryStr ] = useState("");
     let [ searchParams, setSearchParams ] = useSearchParams();
+    const [ itemModalOpen, setItemModalOpen ] = useState(false);
+    const [ selectedItem, setSelectedItem ] = useState("");
+  
+    const handleOpenItemModal = (event) => {
+        const id = event.currentTarget.id;
+        setSelectedItem(id);
+        setItemModalOpen(true);
+    };
+  
+    const handleCloseItemModal = () => {
+        setItemModalOpen(false);
+    };
+
 
     const fetchData = useCallback( async () => {
         try {
@@ -68,6 +82,11 @@ const ExplorePage = () => {
 
     return (
     <>
+        <ItemDetailsModal
+            isOpen={itemModalOpen}
+            onClose={handleCloseItemModal}
+            itemId={selectedItem}
+        />
         <div className='filter'>
             <button className='filter-button' onClick={handleShowFilters}>
                 {isFilterVisible ? 
@@ -170,6 +189,7 @@ const ExplorePage = () => {
         </div>
         <ItemList 
             data={data}
+            handleOpenItemModal={handleOpenItemModal}
         />
     </>
     )

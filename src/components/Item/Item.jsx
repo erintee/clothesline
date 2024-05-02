@@ -1,9 +1,9 @@
 import './Item.scss';
 
-const Item = ({item}) => {
+const Item = ({item, handleOpenItemModal}) => {
 
     return (
-        <div className='item'>
+        <div className='item' id={item.id} onClick={handleOpenItemModal}>
             <div className='item__image-container'>
                 <img className='item__image' src={`http://localhost:8080/uploads/${item.image}`} alt={item.title}/>
             </div>

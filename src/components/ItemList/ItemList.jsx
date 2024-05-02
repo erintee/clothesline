@@ -1,7 +1,7 @@
 import Item from '../Item/Item';
 import './ItemList.scss';
 
-const ItemList = ({data}) => {
+const ItemList = ({ data, handleOpenItemModal }) => {
     return (
         <div className='item-list'>
         {data.map((item)=> {
@@ -9,6 +9,7 @@ const ItemList = ({data}) => {
                 <Item
                     key={item.id}
                     item={item}
+                    handleOpenItemModal={handleOpenItemModal}
                 />
             )
         })}

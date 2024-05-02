@@ -1,0 +1,26 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.item-modal__header {
+    @include m-header;
+    font-size: 24px;
+    text-align: left;
+    margin-top: 1.5rem;
+    color: black;
+
+    @include tablet {
+      margin: 0 3rem;
+      margin-bottom: 1rem;
+    }
+}
+
+.item-modal__details {
+    @include m-body;
+    text-align: left;
+    margin-top: 1rem;
+    flex-grow: 1;
+
+    @include tablet {
+        margin: 0 3rem;
+    }
+}

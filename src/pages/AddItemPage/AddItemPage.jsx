@@ -31,11 +31,12 @@ const AddItemPage = ({ user }) => {
 
         try {
             const response = await axios.post('http://localhost:8080/api/items', formData, config);
-            if (response.status === "success") {
-                navigate("/");
+            if (response.status === 201) {
+                navigate(-1);
             }
         } catch (error) {
             console.error(error);
+            alert("Could not add item. Please try again later.")
         }
         
     }
@@ -87,6 +88,7 @@ const AddItemPage = ({ user }) => {
                 <option value='blue'>Blue</option>
                 <option value='gold'>Gold</option>
                 <option value='green'>Green</option>
+                <option value='grey'>Grey</option>
                 <option value='orange'>Orange</option>
                 <option value='pink'>Pink</option>
                 <option value='purple'>Purple</option>
@@ -131,6 +133,7 @@ const AddItemPage = ({ user }) => {
                     <option value='XL/14/32'>XL/14/32</option>
                     <option value='2XL/16/33'>2XL/16/33</option>
                     <option value='3XL/18/34'>3XL/18/34</option>
+                    <option value='N/A'>N/A</option>
                 </select>
             }
 

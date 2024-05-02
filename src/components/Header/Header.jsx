@@ -1,5 +1,6 @@
 import './Header.scss';
 import Logo from '../../assets/logos/clothesline-logo-black.png';
+import { Link } from 'react-router-dom';
 
 const Header = ({ user, setUser, isLoggedIn }) => {
     const handleLogout = () => {
@@ -9,7 +10,9 @@ const Header = ({ user, setUser, isLoggedIn }) => {
     return (
         <header className='header'>
             <div className='header__logo-container'>
-                <p className='header__logo'>LOGO</p>
+                <Link to='/'>
+                    <p className='header__logo'>LOGO</p>
+                </Link>
             </div>
             {isLoggedIn?
                 <div className='header__text-container'>

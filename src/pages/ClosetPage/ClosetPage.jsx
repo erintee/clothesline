@@ -42,7 +42,7 @@ const ClosetPage = ({ user }) => {
         <div className="closet">
             <section className="closet__header">
                 <h1 className="closet__title">{userName}'s Closet</h1>
-                {Number(userId) === user.id ? <ButtonPrimary clickHandler={() => navigate("/add")}>Add item</ButtonPrimary> : <></>}
+                {Number(userId) === user.id ? <ButtonPrimary clickHandler={() => navigate("/add")}>+ Add item</ButtonPrimary> : <></>}
             </section>
             <ItemList
                 data={items}

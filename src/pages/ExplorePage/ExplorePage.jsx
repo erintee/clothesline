@@ -109,6 +109,7 @@ const ExplorePage = () => {
                         <option value='blue'>Blue</option>
                         <option value='gold'>Gold</option>
                         <option value='green'>Green</option>
+                        <option value='grey'>Grey</option>
                         <option value='orange'>Orange</option>
                         <option value='pink'>Pink</option>
                         <option value='purple'>Purple</option>
@@ -153,6 +154,7 @@ const ExplorePage = () => {
                             <option value='XL/14/32'>XL/14/32</option>
                             <option value='2XL/16/33'>2XL/16/33</option>
                             <option value='3XL/18/34'>3XL/18/34</option>
+                            <option value='N/A/'>N/A</option>
                         </select>
                     }
                     <div className='search__buttons'>

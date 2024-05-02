@@ -31,11 +31,13 @@ const AddItemPage = ({ user }) => {
 
         try {
             const response = await axios.post('http://localhost:8080/api/items', formData, config);
+            if (response.status === "success") {
+                navigate("/");
+            }
         } catch (error) {
             console.error(error);
         }
         
-        navigate("/");
     }
     
     const handleClear = () => {

@@ -26,7 +26,7 @@ const ClosetPage = ({ user }) => {
         }
 
         fetchUserItems();
-    }, [userId]);
+    }, [userId, token]);
 
     useEffect (() => {
         const fetchUserName = async () => {

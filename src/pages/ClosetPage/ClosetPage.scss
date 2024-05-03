@@ -5,13 +5,40 @@
     margin-top: 1rem;
     
     &__header {
+        display: flex;
+        justify-content: space-between;
         padding: 0 1rem;
+        @include desk-width;
+        margin-bottom: 1rem;
     }
     
     &__title {
-        display: inline-block;
         @include m-header;
         padding-bottom: 0.5rem;
         border-bottom: 2px solid $teal;
+    }
+
+    &__add-button--mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        border-radius: 50%;
+        background-color: $teal;
+        color: white;
+        @include m-header;
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    &__add-button--td {
+        display: none;
+
+        @include tablet {
+            display: block;
+            width: 240px;
+        }
     }
 }

@@ -1,27 +1,27 @@
 import './Header.scss';
-import Logo from '../../assets/logos/clothesline-logo-black.png';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
+    const navigate = useNavigate()
+
     const handleLogout = () => {
         localStorage.removeItem("authToken");
         setUser(null);
         setIsLoggedIn(false)
     }
+
     return (
         <header className='header'>
-            <div className='header__logo-container'>
-                <Link to='/'>
-                    <p className='header__logo'>LOGO</p>
-                </Link>
+            <div className='header__content'>
+                <span className='header__logo' onClick={() => navigate("/")}>ClothesLine</span>
+                {isLoggedIn?
+                    <div className='header__text-container'>
+                        <p className='header__name' onClick={() => navigate(`/closets/${user.id}`)} >{user.firstName}</p>
+                        <p className='header__logout' onClick={handleLogout}>Log Out</p>
+                    </div>
+                    : <></>
+                }
             </div>
-            {isLoggedIn?
-                <div className='header__text-container'>
-                    <p className='header__greeting'>{user.firstName}</p>
-                    <p className='header__logout' onClick={handleLogout}>Log Out</p>
-                </div>
-                : <></>
-            }
         </header>
     )
 }

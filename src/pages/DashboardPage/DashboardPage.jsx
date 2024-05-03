@@ -30,14 +30,38 @@ const DashboardPage = ({ user }) => {
 
     return (
         <div className="dashboard">
-            <h1 className="dashboard__greeting">Hey, {user.firstName}!</h1>
-            <section className="actions">
-                <div className="actions__explore" onClick={() => navigate("/explore")}>Link to "Explore" page</div>
-                <div className="actions__my-closet" onClick={() => navigate(`closets/${user.id}`)}>Link to "My Closet" page</div>
-                <div className="actions__requests">
-                    Requests
-                    <p>You have {requests.incoming.length} incoming request{requests.incoming.length === 1 ? "" : 's'}</p>
-                    <p>You have {requests.outgoing.length} pending request{requests.outgoing.length === 1 ? "" : 's'}</p>
+            <div className="dashboard__background"></div>
+            <section className="dashboard__content">
+                <h1 className="dashboard__greeting">What are you wearing today?</h1>
+                <div className="dashboard__actions-container">
+                    <section className="dashboard__actions">
+                        <div className="dashboard__link dashboard__link--explore" onClick={() => navigate("/explore")}>
+                            <p className="dashboard__subheader">Browse</p>
+                        </div>
+                        <div className="dashboard__link dashboard__link--my-closet" onClick={() => navigate(`closets/${user.id}`)}>
+                            <p className="dashboard__subheader">My closet</p>
+                        </div>
+                        
+                        <div className="dashboard__link dashboard__link--requests">
+                            <p className="dashboard__subheader">Swap</p>
+                            <div className="requests">
+                                <div className="requests__section">
+                                    <span 
+                                        className="requests__alert">
+                                        {requests.incoming.length}
+                                    </span>
+                                    <p className="requests__label">incoming</p>
+                                </div>
+                                <div className="requests__section">
+                                <span 
+                                        className="requests__alert">
+                                        {requests.outgoing.length}
+                                    </span>
+                                    <p className="requests__label">outgoing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </section>
         </div>

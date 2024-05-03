@@ -50,11 +50,12 @@ const AddItemPage = ({ user }) => {
 
     return (
         <form encType="multipart/form-data" onSubmit={handleSubmit}>
-            <label>Title</label>
+            <label className='search__label'>Title</label>
             <input
                 type="text"
                 name="title"
                 id="title"
+                className="search__input"
                 onChange={(e) => {setTitle(e.target.value)}}
             />
 

@@ -1,0 +1,136 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.dashboard {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+        position: relative;
+        top: 80px;
+    }
+    
+    &__background {
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url('../../assets/images/linen-background.jpg');
+        background-size: cover;
+        z-index: -1;
+    }
+
+    &__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 70%;
+    }
+    
+    &__greeting {
+        @include m-header;
+        margin: 6rem auto;
+        color: white;
+        padding: 0 1rem;
+        text-align: center;
+
+        @include tablet {
+            @include td-header;
+        }
+    }
+    
+    &__actions-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding-top: 3rem 0;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+        @include desk-width;
+        padding: 4rem 1.5rem;
+        gap: 1rem;
+
+        @include tablet {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        @include desktop {
+            justify-content: space-evenly;
+            padding: 1rem 0;
+        }
+    }
+
+    &__link {
+        display: block;
+        flex-grow: 1;
+        height: 30vh;
+        max-height: 300px;
+        background-color: white;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        
+        &--explore {
+            background-image: url("../../assets/images/explore-page.jpg");
+            background-size: cover;
+        }
+        
+        &--my-closet {
+            background-image: url('../../assets/images/my-closet.jpeg');
+            background-size: cover;
+        }
+        
+        &--requests {
+            width: 100%;
+            background-color: #9C9287;
+        }
+    }
+
+    &__subheader {    
+        text-transform: uppercase;
+        @include m-header;
+        color: black;
+        background-color: white;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.requests {
+    padding: 1rem;
+    display: flex;
+    justify-content: stretch;
+    gap: 1rem;
+    height: 80%;
+
+    &__section {
+        height: 100%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    &__alert {
+        display: block;
+        color: teal;
+        font-size: 3rem;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    &__label {
+        @include m-label;
+        font-size: 1rem;
+        text-align: center;
+    }
+}

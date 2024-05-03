@@ -2,10 +2,11 @@ import './Header.scss';
 import Logo from '../../assets/logos/clothesline-logo-black.png';
 import { Link } from 'react-router-dom';
 
-const Header = ({ user, setUser, isLoggedIn }) => {
+const Header = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
     const handleLogout = () => {
         localStorage.removeItem("authToken");
         setUser(null);
+        setIsLoggedIn(false)
     }
     return (
         <header className='header'>

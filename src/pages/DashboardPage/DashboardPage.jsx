@@ -12,7 +12,7 @@ const DashboardPage = ({ user }) => {
     useEffect(() =>{
         const fetchRequests = async () => {
             const token = localStorage.getItem("authToken");
-            const response = await axios.get(`${BASE_URL}/users/${user.id}/requests`,
+            const response = await axios.get(`${BASE_URL}/requests/${user.id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -23,8 +23,6 @@ const DashboardPage = ({ user }) => {
 
         fetchRequests();
     }, []);
-
-    console.log(requests)
 
     if (!requests.incoming || !requests.outgoing) {
         return <>Loading</>

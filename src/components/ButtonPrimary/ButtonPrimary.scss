@@ -11,10 +11,11 @@
     padding: 0.25rem;
     @include m-label;
     cursor: pointer;
+    width: 100%;
 
     @include tablet {
         flex-grow: unset;
-        width: 120px;
+        // width: 120px;
     }
 
     &:active {

@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Registration.scss';
 import { BASE_URL } from '../../utils/utils';
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
-import ButtonSecondary from '../ButtonSecondary/ButtonSecondary';
 import FormError from '../../components/FormError/FormError';
 
 const Registration = ({ setIsRegistered }) => {
@@ -113,12 +112,7 @@ const Registration = ({ setIsRegistered }) => {
                 <ButtonPrimary
                     type='submit'
                 >Register</ButtonPrimary>
-                
-                <p className='registration__login'>Already have an account?</p>
-                <ButtonSecondary
-                    onClick={setIsRegistered(true)}
-                >Login</ButtonSecondary>
-\            </form>
+            </form>
         </div>    
     )
 }

@@ -65,17 +65,17 @@ Friends and small communities
 
 ### Data
 
-![](./images/sql-flowchart.png)
+![](./images/sql-diagram.png)
 
 ### Endpoints
 
 **GET /items**
 - Get a list of items
-Parameters:
-- user id?
-- JWD token
 
-Optional query parameters (for search):
+Parameters:
+- JWT
+
+Optional query parameters:
 - type, colour, size
 
 Response: 
@@ -83,7 +83,8 @@ Response:
 [
     {
         "id":1,
-        "username": "user123"
+        "user_id": 1,
+        "title": "Black heels",
         "type": "shoes",
         "colour": "black",
         "size": "9",
@@ -91,7 +92,8 @@ Response:
     },
     {
         "id":46,
-        "username": "otherUser"
+        "user_id": 5,
+        "title": "Leather flats",
         "type": "shoes",
         "colour": "black",
         "size": "9",
@@ -110,11 +112,13 @@ Parameters:
 Response:
 ```
 {
-    "id":1,
+    "id": 1,
+    "title": "Black heels",
     "type": "shoes",
     "colour": "black",
     "size": "9/41",
     "image": "image.jpg",
+    "first_name": "Candace",
 }
 ```
 If id not found, 404. If successful, 201.
@@ -124,7 +128,8 @@ If id not found, 404. If successful, 201.
 
 Parameters:
 - user id
-- JWT token
+- JWT
+- title
 - type
 - colour
 - size
@@ -134,6 +139,8 @@ Response:
 ```
 {
     "id": 1,
+    "user_id": 25,
+    "title": "Red rain jacket",
     "type": "jacket",
     "colour": "red",
     "size": "M/8/28",
@@ -141,25 +148,26 @@ Response:
 }
 ```
 
-**GET /users***
-- Get all users
+<!-- **GET /users**
+- Get all friends
+
+Parameters:
+- JWT
 
 Response body:
 ```
 [
     {
         "id": 1,
-        "username": "user123",
-        "email": "user@email.com",
+        "first_name": "Mark",
     },
     {
         "id", 2,
-        "username": "user456",
-        "email": "best_user@email.com"
+        "first_name": "Elise",
     },
     ...
 ]
-```
+``` -->
 
 **GET /users/:userId**
 - Get user's information/profile; used in tandem with /:userId/items endpoint to display a user's closet

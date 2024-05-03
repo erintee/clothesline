@@ -46,14 +46,6 @@ export default function Modal ({ isOpen, onClose, children, handleSubmit, button
                     <Close className='modal__close-icon' onClick={handleCloseModal}/>
                 </div>
                 {children}
-                <div className='modal__buttons'>
-                    <div className='modal__cancel' onClick={handleCloseModal}>
-                        <ButtonSecondary>Cancel</ButtonSecondary>
-                    </div>
-                    <div className='modal__submit' onClick={handleSubmit}>
-                        <ButtonPrimary>{buttonText}</ButtonPrimary>
-                    </div>
-                </div>
             </div>
         </dialog>
       );

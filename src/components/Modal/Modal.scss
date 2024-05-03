@@ -8,28 +8,30 @@
     height: 100%;
     max-width: unset;
     max-height: unset;
+    padding: 1rem;
     
     @include tablet {
-        margin: 186px auto;
-        height: 262px;
-        max-width: 672px;
+        margin: 10vh auto;
+        height: 700px;
+        width: 450px;
+        border-radius: 8px;
     }
     
     @include desktop {
-        height: 262px;
+        margin: 20vh auto;
+        width: 750px;
+        height: 484px;
+        padding-bottom: 2rem;
     }
     
     &::backdrop {
         background-color: #13182C90;
     }
-
+    
     &__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         height: 100%;
     }
-    
+
     &__toolbar {
         display: flex;
         justify-content: flex-end;
@@ -37,36 +39,5 @@
   
     &__close-icon {
         color: black;
-    }
-  
-    &__buttons {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 100%;
-  
-        @include tablet {
-            justify-content: flex-end;
-            width: unset;
-            margin: 0 3rem 1rem 3rem;
-            gap: 1rem;
-        }
-    }
-  
-    &__cancel {
-      width: 45%;
-  
-      @include tablet {
-        width: unset;
-      }
-    }
-  
-    &__submit {
-      width: 45%;
-  
-      @include tablet {
-        width: unset;
-      }
     }
 }

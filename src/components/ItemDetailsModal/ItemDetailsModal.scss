@@ -1,26 +1,121 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
 
-.item-modal__header {
-    @include m-header;
-    font-size: 24px;
-    text-align: left;
-    margin-top: 1.5rem;
-    color: black;
+.item-modal{
+    &__content-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        overflow-y: scroll;
 
-    @include tablet {
-      margin: 0 3rem;
-      margin-bottom: 1rem;
+        @include desktop {
+            height: 400px;
+            width: 718px;
+            flex-wrap: wrap;
+            column-gap: 1rem;
+        }
     }
-}
+    
+    &__image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 250px;
 
-.item-modal__details {
-    @include m-body;
-    text-align: left;
-    margin-top: 1rem;
-    flex-grow: 1;
-
+        @include desktop {
+            width: 45%;
+            height: 100%;
+            align-content: space-between ;
+        }
+    }
+    
+    &__image {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+    &__text-container {
+        @include desktop {
+            width: 50%;
+        }
+    }
+    &__header {
+    @include m-subheader;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 1.5rem;
+    
     @include tablet {
-        margin: 0 3rem;
+        @include td-subheader;
+    }
+
+    @include desktop {
+            text-align: left;
+            margin: 0;
+        }
+    }
+
+    &__details {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        @include m-body;
+    
+        @include desktop {
+            justify-content: flex-start;
+        }
+    }
+
+    &__tag {
+        background-color: rgba(255, 191, 0, 0.5);
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+
+        &:hover {
+            background-color: $amber;
+        }
+    }
+
+    &__form {
+        @include desktop {
+        }
+    }
+    
+    &__label {
+        display: block;
+        @include m-label;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__input {
+        @include m-body;
+        width: 100%;
+        height: 100px;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+
+        @include tablet {
+            @include td-body;
+        }
+    }
+
+    &__submit {
+        width: 100%;
+    }
+    
+    &__closet {
+        width: 100%;
     }
 }

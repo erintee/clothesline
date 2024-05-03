@@ -20,14 +20,14 @@ function App() {
       const fetchUser = async () => {
           try {
               const token = localStorage.getItem("authToken");
-              const response = await axios.get(`${BASE_URL}/dashboard`, {
+              const response = await axios.get(`${BASE_URL}/users/active`, {
                   headers: {
                       Authorization: `Bearer ${token}`,
                   },
               });
               setUser(response.data);
           } catch (error) {
-              console.error(error);
+              console.error("Couldn't fetch active user", error);
           }
       }
       fetchUser();
@@ -45,6 +45,7 @@ function App() {
           user={user}
           setUser={setUser}
           isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
         />
 
         <Routes>

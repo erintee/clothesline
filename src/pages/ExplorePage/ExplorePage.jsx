@@ -9,7 +9,7 @@ import filterIcon from '../../assets/icons/filter-icon.svg';
 import ButtonSecondary from '../../components/ButtonSecondary/ButtonSecondary';
 import ItemDetailsModal from '../../components/ItemDetailsModal/ItemDetailsModal';
 
-const ExplorePage = () => {
+const ExplorePage = ({user}) => {
     const [ data, setData ] = useState([]);
     const [ isFilterVisible, setIsFilterVisible ] = useState(false);
     const [ type, setType ] = useState("");
@@ -86,6 +86,7 @@ const ExplorePage = () => {
             isOpen={itemModalOpen}
             onClose={handleCloseItemModal}
             itemId={selectedItem}
+            user={user}
         />
         <div className='filter'>
             <button className='filter-button' onClick={handleShowFilters}>

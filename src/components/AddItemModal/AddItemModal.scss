@@ -11,6 +11,7 @@
     &__title {
         padding: 1rem 0;
         @include m-header;
+        font-size: 1.25rem;
     }
 
     &__label {

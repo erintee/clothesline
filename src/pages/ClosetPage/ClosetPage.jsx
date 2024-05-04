@@ -60,7 +60,11 @@ const ClosetPage = ({ user }) => {
             }
             <div className="closet__header-container">
                 <section className="closet__header">
-                    <h1 className="closet__title">{userName}'s Closet</h1>
+                    <h1 className="closet__title">
+                        {Number(userId) === user.id ?
+                        "My Closet" :
+                        `${userName}'s Closet`}
+                    </h1>
                     {Number(userId) === user.id ?
                         <>
                             <div className="closet__add-button--mobile" onClick={handleOpenAddModal}>

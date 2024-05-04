@@ -26,7 +26,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         return true;
     };
     
-    const handleClear = () => {
+    const handleClear = (e) => {
+        e.preventDefault();
         setTitle("");
         setType("");
         setColour("");
@@ -78,7 +79,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                     <input
                         type="text"
                         name="title"
-                        // id="title"
+                        id="title"
+                        value={title}
                         className="form__input"
                         onChange={(e) => {setTitle(e.target.value)}}
                     />
@@ -88,7 +90,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                 <label className='form__label' htmlFor="type">Type</label>
 
                     <select
-                        name='type'
+                        name="type"
+                        id="type"
                         value={type}
                         onChange={(e) => {setType(e.target.value)}}
                         className='form__input'
@@ -106,7 +109,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         
                 <label className='form__label' htmlFor="colour">Colour</label>
                     <select
-                        name='colour'
+                        name="colour"
+                        id="colour"
                         value={colour}
                         onChange={(e) => setColour(e.target.value)}
                         className='form__input'
@@ -130,10 +134,11 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                 <label className='form__label' htmlFor="size">Size</label>
                     {type === "shoes" ?
                         <select
-                            name='size'
+                            name="size"
+                            id="size"
                             value={size}
                             onChange={(e) => setSize(e.target.value)}
-                            className='form__input'
+                            className="form__input"
                         >
                             <option value=''>Select</option>
                             <option value='5'>5</option>
@@ -147,10 +152,11 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                         </select>
                         :
                         <select
-                            name='size'
+                            name="size"
+                            id="size"
                             value={size}
                             onChange={(e) => setSize(e.target.value)}
-                            className='form__input'
+                            className="form__input"
                         >
                             <option value=''>Select</option>
                             <option value='XXS/0/25'>XXS/0/25</option>
@@ -171,15 +177,16 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                 <label className="form__label" htmlFor="image">Upload photo</label>
                     <input 
                         className="form__input form__input--image"
-                        type='file' 
-                        name='image' 
+                        type="file" 
+                        name="image"
+                        id="image" 
                         onChange={(e) => {
                             setImage(e.target.files[0])
                             setFilename(e.target.value)
                         }}
                     />
             </section>
-            <div className='form__buttons'>
+            <div className="form__buttons">
                 <ButtonPrimary
                     type="submit"
                 >Add</ButtonPrimary>

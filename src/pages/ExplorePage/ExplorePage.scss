@@ -2,10 +2,8 @@
 @use '../../styles/partials/variables' as *;
 
 .explore {
-    background-color: $off-white;
-    
     @include desktop {
-        padding-top: 80px;
+        padding-top: 5rem;
     }
 }
 

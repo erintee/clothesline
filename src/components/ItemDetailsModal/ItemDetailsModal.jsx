@@ -46,7 +46,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
         });
       
       if(response.status === 201){
-
+        //put a success message here?
       }
 
     } catch (error) {

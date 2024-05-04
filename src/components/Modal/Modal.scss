@@ -9,18 +9,20 @@
     max-width: unset;
     max-height: unset;
     padding: 1rem;
+    position: relative;
+
     
     @include tablet {
         margin: 10vh auto;
-        height: 700px;
-        width: 450px;
+        height: 55vh;
+        width: 50vw;
         border-radius: 8px;
     }
     
     @include desktop {
         margin: 20vh auto;
-        width: 750px;
-        height: 484px;
+        width: 60vw;
+        height: 50vh;
         padding-bottom: 2rem;
     }
     
@@ -30,14 +32,17 @@
     
     &__content {
         height: 100%;
+        position: relative;
     }
-
+    
     &__toolbar {
         display: flex;
         justify-content: flex-end;
+        position: relative;
     }
-  
+    
     &__close-icon {
         color: black;
+        position: absolute;
     }
 }

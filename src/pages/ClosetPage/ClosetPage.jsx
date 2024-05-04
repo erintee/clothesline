@@ -5,10 +5,13 @@ import { BASE_URL } from "../../utils/utils";
 import ItemList from "../../components/ItemList/ItemList";
 import "./ClosetPage.scss";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
+import AddItemModal from "../../components/AddItemModal/AddItemModal";
 
 const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
     const [ userName, setUserName ] = useState("");
+    const [ addModalOpen, setAddModalOpen ] = useState(false);
+
     const { userId } = useParams();
     const token = localStorage.getItem("authToken");
     const navigate = useNavigate();
@@ -38,18 +41,33 @@ const ClosetPage = ({ user }) => {
         fetchUserName();
     }, [userId]);
 
+    const handleOpenAddModal = (event) => {
+        setAddModalOpen(true);
+    };
+  
+    const handleCloseAddModal = () => {
+        setAddModalOpen(false);
+    };
+
     return (
         <div className="closet">
+            {Number(userId) === user.id && 
+                <AddItemModal
+                    isOpen={addModalOpen}
+                    onClose={handleCloseAddModal}
+                    user={user}
+                ></AddItemModal>
+            }
             <div className="closet__header-container">
                 <section className="closet__header">
                     <h1 className="closet__title">{userName}'s Closet</h1>
                     {Number(userId) === user.id ?
                         <>
-                            <div className="closet__add-button--mobile" onClick={() => navigate("/add")}>
+                            <div className="closet__add-button--mobile" onClick={handleOpenAddModal}>
                             +
                             </div> 
                             <div className="closet__add-button--td">
-                                <ButtonPrimary clickHandler={() => navigate("/add")}>+ Add item</ButtonPrimary>
+                                <ButtonPrimary clickHandler={handleOpenAddModal}>+ Add item</ButtonPrimary>
                             </div>
                         </> : 
                         <></>

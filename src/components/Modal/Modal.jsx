@@ -43,7 +43,9 @@ export default function Modal ({ isOpen, onClose, children, handleSubmit, button
         <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal">
             <div className='modal__content'>
                 <div className='modal__toolbar'>
-                    <Close className='modal__close-icon' onClick={handleCloseModal}/>
+                  <span className='modal__close-icon'>
+                    <Close onClick={handleCloseModal}/>
+                  </span>
                 </div>
                 {children}
             </div>

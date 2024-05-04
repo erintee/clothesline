@@ -9,7 +9,7 @@ import ExplorePage from './pages/ExplorePage/ExplorePage';
 import ClosetPage from './pages/ClosetPage/ClosetPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
-import AddItemPage from './pages/AddItemPage/AddItemPage';
+// import AddItemPage from './pages/AddItemPage/AddItemPage';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(!!localStorage.getItem("authToken"));
@@ -61,11 +61,11 @@ function App() {
             <AuthPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} >
           </Route>
 
-          {/* Add item to my closet */}
+          {/* Add item to my closet
           <Route path='/add' element={isLoggedIn ?
             <AddItemPage user={user} /> :
             <AuthPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
-          </Route>
+          </Route> */}
 
           {/* Items List */}
           <Route path='/explore' element={isLoggedIn ? 

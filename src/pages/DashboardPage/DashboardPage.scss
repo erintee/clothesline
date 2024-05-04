@@ -46,7 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        background-color: $off-white-transparent;
         padding-top: 3rem 0;
     }
 
@@ -97,6 +97,7 @@
     &__subheader {    
         text-transform: uppercase;
         @include m-header;
+        font-size: 1.25rem;
         color: black;
         background-color: white;
         padding: 0.5rem 1rem;

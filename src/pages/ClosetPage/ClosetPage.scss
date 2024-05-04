@@ -2,18 +2,27 @@
 @use "../../styles/partials/mixins" as *;
 
 .closet {
-    margin-top: 1rem;
     
+    @include desktop {
+        padding-top: 5rem;
+    }
+    
+    &__header-container {
+        padding: 1rem 0;
+        background-color: white;
+    }
+
     &__header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 0 1rem;
         @include desk-width;
-        margin-bottom: 1rem;
     }
     
     &__title {
         @include m-header;
+        font-weight: 600;
         padding-bottom: 0.5rem;
         border-bottom: 2px solid $teal;
     }
@@ -23,10 +32,12 @@
         justify-content: center;
         align-items: center;
         width: 42px;
+        height: 42px;
         border-radius: 50%;
         background-color: $teal;
         color: white;
         @include m-header;
+        cursor: pointer;
 
         @include tablet {
             display: none;
@@ -39,6 +50,7 @@
         @include tablet {
             display: block;
             width: 240px;
+            cursor: pointer;
         }
     }
 }

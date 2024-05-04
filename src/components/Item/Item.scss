@@ -6,6 +6,8 @@
     flex-direction: column;
     width: 100vw;
     margin: 1rem 0;
+    background-color: white;
+    cursor: pointer;
 
     @include tablet {
         width: 30%;
@@ -16,6 +18,7 @@
 
         &:hover {
             border: 0.25px solid $grey;
+            color: $teal;
         }
     }
 

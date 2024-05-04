@@ -1,6 +1,19 @@
 @use '../../styles/partials/mixins' as *;
 @use '../../styles/partials/variables' as *;
 
+.explore {
+    background-color: $off-white;
+    
+    @include desktop {
+        padding-top: 80px;
+    }
+}
+
+.filter-container {
+    width: 100%;
+    background-color: white;
+}
+
 .filter {
     padding: 1rem;
     max-width: $desk-max-width;

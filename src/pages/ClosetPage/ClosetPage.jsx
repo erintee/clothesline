@@ -40,20 +40,22 @@ const ClosetPage = ({ user }) => {
 
     return (
         <div className="closet">
-            <section className="closet__header">
-                <h1 className="closet__title">{userName}'s Closet</h1>
-                {Number(userId) === user.id ?
-                    <>
-                        <div className="closet__add-button--mobile" onClick={() => navigate("/add")}>
-                        +
-                        </div> 
-                        <div className="closet__add-button--td">
-                            <ButtonPrimary clickHandler={() => navigate("/add")}>+ Add item</ButtonPrimary>
-                        </div>
-                    </> : 
-                    <></>
-                }
-            </section>
+            <div className="closet__header-container">
+                <section className="closet__header">
+                    <h1 className="closet__title">{userName}'s Closet</h1>
+                    {Number(userId) === user.id ?
+                        <>
+                            <div className="closet__add-button--mobile" onClick={() => navigate("/add")}>
+                            +
+                            </div> 
+                            <div className="closet__add-button--td">
+                                <ButtonPrimary clickHandler={() => navigate("/add")}>+ Add item</ButtonPrimary>
+                            </div>
+                        </> : 
+                        <></>
+                    }
+                </section>
+            </div>
             <ItemList
                 data={items}
             />

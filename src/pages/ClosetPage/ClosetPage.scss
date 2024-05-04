@@ -2,9 +2,12 @@
 @use "../../styles/partials/mixins" as *;
 
 .closet {
-    
+    padding-top: 1rem;
+    @include tablet {
+    }
+
     @include desktop {
-        padding-top: 5rem;
+        padding-top: 6rem;
     }
     
     &__header-container {
@@ -49,7 +52,6 @@
 
         @include tablet {
             display: block;
-            width: 240px;
             cursor: pointer;
         }
     }

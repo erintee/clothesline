@@ -7,14 +7,18 @@ const AuthPage = ({ setIsLoggedIn }) => {
     const [ isRegistered, setIsRegistered ] = useState(true);
 
     return (
-        <>
-        <article className='login'>
-            <section className='login__nav'>
-                <div className='login__nav-link' onClick={() => setIsRegistered(true)}>Login</div>
-                <div className='login__nav-link' onClick={() => setIsRegistered(false)}>Sign Up</div>
+        <div className='auth-page'>
+        <article className='content'>
+            <section className='content__nav'>
+                <div 
+                    className={`content__nav-link ${isRegistered ? "content__nav-link--active" : ""}`} 
+                    onClick={() => setIsRegistered(true)}>Login</div>
+                <div 
+                    className={`content__nav-link ${!isRegistered ? "content__nav-link--active" : ""}`}
+                    onClick={() => setIsRegistered(false)}>Sign Up</div>
             </section>
 
-            <section className='login__form-container'>
+            <section className='content__form-container'>
 
             {isRegistered ? (
                 <Login setIsLoggedIn={setIsLoggedIn} />
@@ -23,7 +27,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
             )}
             </section>
         </article>
-        </>
+        </div>
     )
 }
 

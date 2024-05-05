@@ -42,33 +42,30 @@ const Login = ({ setIsLoggedIn }) => {
 
     return (
         <div className="login">
-            <h1 className="login__title">Log in</h1>
+            <h1 className="login__title">Login</h1>
             <form className="login-form" onSubmit={handleLogin}>
-                <label className="login-form__label">
-                    Email:
-                    <input
-                        className={`login-form__input ${error && !email ? "login-form__input--eror" : ""}`} 
-                        type="text"
-                        name="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <FormError errorState={error} field={email}>Please enter your email</FormError>
-                </label>
+                <label className="login-form__label">Email</label>
+                <input
+                    className={`login-form__input ${error && !email ? "login-form__input--eror" : ""}`} 
+                    type="text"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <FormError errorState={error} field={email}>Please enter your email</FormError>
 
-                <label className="login-form__label">
-                    Password:
-                    <input
-                        className={`login-form__input ${error && !password ? "login-form__input--eror" : ""}`} 
-                        type="text"
-                        name="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FormError errorState={error} field={password}>Please enter your password</FormError>
-                </label>
+                <label className="login-form__label">Password</label>
+                <input
+                    className={`login-form__input ${error && !password ? "login-form__input--eror" : ""}`} 
+                    type="text"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <FormError errorState={error} field={password}>Please enter your password</FormError>
+                
 
-                <ButtonPrimary
-                    type="submit"
-                >Login</ButtonPrimary>
+                <div className="login-form__button">
+                    <ButtonPrimary type="submit">Login</ButtonPrimary>
+                </div>
             </form>
         </div>
     )

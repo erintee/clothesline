@@ -52,10 +52,9 @@ const Registration = ({ setIsRegistered }) => {
 
     return (
         <div className='registration'>
-            <h1 className='registration__title'>Join Clothesline</h1>
+            <h1 className='registration__title'>Join the ClothesLine Community</h1>
             <form className='registration-form' onSubmit={handleSignup}>
-                <label className="registration-form__label">
-                First Name:
+                <label className="registration-form__label">First Name:</label>
                     <input 
                         className={`registration-form__input ${error && !firstName ? "registration-form__input--eror" : ""}`} 
                         type="text" 
@@ -63,10 +62,8 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setFirstName(e.target.value)}
                     />
                     <FormError errorState={error} field={firstName}>First name is required</FormError>
-                </label>
 
-                <label className="registration-form__label">
-                Last Name: 
+                <label className="registration-form__label">Last Name:</label>
                     <input 
                         className={`registration-form__input ${error && !lastName ? "registration-form__input--eror" : ""}`} 
                         type="text" 
@@ -74,10 +71,8 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setLastName(e.target.value)}    
                     />
                     <FormError errorState={error} field={lastName}>Last name is required</FormError>
-                </label>
                 
-                <label className="registration-form__label">
-                Email: 
+                <label className="registration-form__label">Email: </label>
                     <input 
                         className={`registration-form__input ${error && !email ? "registration-form__input--eror" : ""}`} 
                         type="text" 
@@ -85,10 +80,8 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormError errorState={error} field={email}>Please enter a valid email address</FormError>
-                </label>
                 
-                <label className="registration-form__label">
-                Password: 
+                <label className="registration-form__label">Password:</label>
                     <input 
                         className={`registration-form__input ${error && !password ? "registration-form__input--eror" : ""}`} 
                         type="text" 
@@ -96,10 +89,8 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <FormError errorState={error} field={password}>Please enter a password</FormError>
-                </label>
 
-                <label className="registration-form__label">
-                Confirm Password: 
+                <label className="registration-form__label">Confirm Password:</label>
                     <input 
                         className={`registration-form__input ${error && !confirmPassword ? "registration-form__input--eror" : ""}`} 
                         type="text" 
@@ -107,11 +98,10 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <FormError errorState={error} field={confirmPassword}>Passwords do not match</FormError>
-                </label>
 
-                <ButtonPrimary
-                    type='submit'
-                >Register</ButtonPrimary>
+                <div className='registration-form__button'>
+                    <ButtonPrimary type='submit'>Register</ButtonPrimary>
+                </div>
             </form>
         </div>    
     )

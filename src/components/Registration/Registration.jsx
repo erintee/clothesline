@@ -84,7 +84,7 @@ const Registration = ({ setIsRegistered }) => {
                 <label className="registration-form__label">Password:</label>
                     <input 
                         className={`registration-form__input ${error && !password ? "registration-form__input--eror" : ""}`} 
-                        type="text" 
+                        type="password" 
                         name="password" 
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -93,7 +93,7 @@ const Registration = ({ setIsRegistered }) => {
                 <label className="registration-form__label">Confirm Password:</label>
                     <input 
                         className={`registration-form__input ${error && !confirmPassword ? "registration-form__input--eror" : ""}`} 
-                        type="text" 
+                        type="password" 
                         name="confirmPassword" 
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />

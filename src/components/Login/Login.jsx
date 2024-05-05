@@ -4,11 +4,15 @@ import "./Login.scss";
 import { BASE_URL } from "../../utils/utils";
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary'
 import FormError from '../../components/FormError/FormError';
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setIsLoggedIn }) => {
+
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ error, setError ] = useState(false);
+    const [ foundUser, setFoundUser ] = useState(true);
+    const navigate = useNavigate();
 
     const isFormValid = () => {
         if (!email || !password ) {
@@ -35,7 +39,12 @@ const Login = ({ setIsLoggedIn }) => {
             
             localStorage.setItem("authToken", response.data)
             setIsLoggedIn(true);
+            navigate("/");
         } catch (error) {
+            if (error.response.status === 401) {
+                setError(true);
+                setFoundUser(false);
+            }
             console.error("Login error: ", error);
         }
     };
@@ -61,6 +70,7 @@ const Login = ({ setIsLoggedIn }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <FormError errorState={error} field={password}>Please enter your password</FormError>
+                <FormError errorState={error} field={foundUser}>Incorrect username or password</FormError>
                 
 
                 <div className="login-form__button">

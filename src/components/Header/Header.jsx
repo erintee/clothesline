@@ -8,6 +8,7 @@ const Header = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
         localStorage.removeItem("authToken");
         setUser(null);
         setIsLoggedIn(false)
+        navigate("/")
     }
 
     return (

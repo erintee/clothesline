@@ -52,7 +52,7 @@ const Registration = ({ setIsRegistered }) => {
 
     return (
         <div className='registration'>
-            <h1 className='registration__title'>Join the ClothesLine Community</h1>
+            <h1 className='registration__title'>Join the ClothesLine community</h1>
             <form className='registration-form' onSubmit={handleSignup}>
                 <label className="registration-form__label">First Name:</label>
                     <input 

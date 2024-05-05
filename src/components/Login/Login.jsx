@@ -42,7 +42,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     return (
         <div className="login">
-            <h1 className="login__title">Login</h1>
+            <h1 className="login__title">Sign in to your account</h1>
             <form className="login-form" onSubmit={handleLogin}>
                 <label className="login-form__label">Email</label>
                 <input
@@ -56,7 +56,7 @@ const Login = ({ setIsLoggedIn }) => {
                 <label className="login-form__label">Password</label>
                 <input
                     className={`login-form__input ${error && !password ? "login-form__input--eror" : ""}`} 
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />

@@ -3,21 +3,41 @@
 
 .auth-page {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     padding: 1rem;
+    background-image: url(../../assets/images/auth-page-mobile.jpeg);
+    background-size: cover;
+
+    @include tablet {
+        background-image: url(../../assets/images/auth-page-desktop.jpeg);
+    }
+
+    &__title {
+        @include m-header;
+        color: white;
+        margin-top: 1rem;
+
+        @include tablet {
+            @include td-header;
+            margin-top: 2rem;
+        }
+    }
 }
 
 .content {
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 3rem;
+    max-width: 500px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+    margin-top: 2rem;
 
     &__nav {
         display: flex;
@@ -26,21 +46,22 @@
     }
     
     &__nav-link {
-        border-bottom: 1px solid $grey;
         width: 50%;
         padding: 0.5rem 1rem;
         text-align: center;
         @include m-label;
         color: $teal;
+        cursor: pointer;
 
         &--active {
-            background-color: $grey;
-            color: teal;
+            background-color: #B59C85;
+            color: white;
         }
     }
 
     &__form-container {
         padding: 1rem 0.5rem;
         width: 100%;
+        box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
     }
 }

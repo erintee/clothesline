@@ -8,6 +8,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
 
     return (
         <div className='auth-page'>
+        <h1 className='auth-page__title'>Minimize your footprint, not your options.</h1>
         <article className='content'>
             <section className='content__nav'>
                 <div 

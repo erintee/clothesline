@@ -3,33 +3,41 @@
 
 .item-modal{
     &__content-container {
+        height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        padding: 2rem 1rem;
-        height: 100%;
+        padding: 2rem 0.5rem 1rem;
         overflow-y: scroll;
 
         @include desktop {
-            // height: 400px;
-            // width: 718px;
             justify-content: center;
             flex-wrap: wrap;
+            padding: 2rem 1rem 1rem;
             column-gap: 1rem;
+        }
+    }
+    
+    &__item-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        
+        @include desktop {
+            width: 45%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
         }
     }
     
     &__image-container {
         display: flex;
         justify-content: center;
-        width: 100%;
+        align-items: center;
         height: 250px;
-
-        @include desktop {
-            width: 45%;
-            height: 100%;
-            align-content: space-between ;
-        }
     }
     
     &__image {
@@ -37,49 +45,39 @@
         max-width: 100%;
         max-height: 100%;
     }
-    
-    &__text-container {
-        flex-grow: 1;
+
+    &__header {
+        @include m-header;
+        color: black;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        text-align: center;
+        margin-top: 1rem;
+        
+        @include tablet {
+            @include td-subheader;
+            padding-top: 1rem;
+        }
+    
         @include desktop {
-            width: 50%;
-            justify-content: center;
+                text-align: left;
+                margin: 0;
+            }
         }
-    }
     
-    &__header {
-    @include m-subheader;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 1.5rem;
-    
-    @include tablet {
-        @include td-subheader;
-    }
-
-    @include desktop {
-            text-align: left;
-            margin: 0;
-        }
-    }
-
     &__details {
         display: flex;
         justify-content: center;
         gap: 1rem;
         margin: 1rem 0;
-        @include m-body;
-    
+        
         @include desktop {
             justify-content: flex-start;
         }
     }
-
+    
     &__tag {
+        @include m-body;
         background-color: rgba(255, 191, 0, 0.5);
         padding: 0.25rem 0.5rem;
         border-radius: 20px;
@@ -89,15 +87,31 @@
         }
     }
     
+    &__request-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        @include desktop {
+            width: 50%;
+            height: 346px;
+            justify-content: flex-start;
+        }
+    }
+    
     &__label {
         display: block;
         @include m-label;
         margin-top: 1rem;
         margin-bottom: 0.5rem;
+
+        @include desktop {
+            margin-top: 0;
+        }
     }
 
     &__input {
-        all: unset;
         box-sizing: border-box;
         width: 100%;
         height: 100px;

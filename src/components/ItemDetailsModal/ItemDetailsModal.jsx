@@ -63,16 +63,18 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
     <Modal isOpen={isOpen} onClose={onClose}>
         <>
         <section className='item-modal__content-container'>
-          <div className='item-modal__image-container'>
-            <img className='item-modal__image' src={`http://localhost:8080/uploads/${item.image}`} alt={item.title} />
-          </div>
-          <div className="item-modal__text-container">
+          <section className='item-modal__item-container'>
+            <div className='item-modal__image-container'>
+              <img className='item-modal__image' src={`http://localhost:8080/uploads/${item.image}`} alt={item.title} />
+            </div>
             <div className='item-modal__header'>{item.title}</div>
             <div className='item-modal__details'>
-              <p className='item-modal__tag'>Size {item.size}</p>
+              <p className='item-modal__tag'>size {item.size}</p>
               <p className='item-modal__tag'>{item.type}</p>
               <p className='item-modal__tag'>{item.colour}</p>
             </div>
+          </section>
+          <section className="item-modal__request-container">
             <form onSubmit={handleSubmit} className="item-modal__form">
               <label className="item-modal__label">Let {item.first_name} know you'd like to borrow this:</label>
               <textarea
@@ -91,7 +93,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
                   <ButtonSecondary>Browse {item.first_name}'s closet</ButtonSecondary>
               </div>
             </div>
-          </div>
+          </section>
         </section>
         </>
     </Modal>

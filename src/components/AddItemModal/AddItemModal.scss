@@ -6,12 +6,30 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     &__title {
         padding: 1rem 0;
         @include m-header;
         font-size: 1.25rem;
+    }
+
+    &__content {
+        @include desktop {
+            display: flex;
+            flex-direction: row;
+            justify-content: stretch;
+        }
+    }
+
+    &__content-block {
+        @include desktop {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 50%;
+            padding: 2rem;
+        }
     }
 
     &__label {
@@ -44,7 +62,6 @@
 
         &--image {
             border: none;
-            margin-top: 0.5rem;
 
             &::file-selector-button{
                 border: 1px solid $teal;

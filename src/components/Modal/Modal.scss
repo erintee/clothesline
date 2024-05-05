@@ -13,17 +13,16 @@
 
     
     @include tablet {
-        margin: 10vh auto;
-        height: 45vh;
-        width: 50vw;
+        margin: 10vh auto 30vh;
+        width: 60vw;
+        height: 55vh;
         border-radius: 8px;
     }
     
     @include desktop {
-        margin: 20vh auto;
-        width: 60vw;
-        height: 50vh;
-        padding-bottom: 2rem;
+        // margin: 20vh auto;
+        // width: 60vw;
+        // padding-bottom: 2rem;
     }
     
     &::backdrop {

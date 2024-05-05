@@ -56,3 +56,27 @@
         }
     }
 }
+
+.placeholder {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__icon {
+        width: 150px;
+        height: auto;
+        opacity: 50%;
+    }
+
+    &__message {
+        @include m-body;
+        font-style: italic;
+        text-align: center;
+        
+        @include tablet {
+            @include td-body;
+        }
+    }
+}

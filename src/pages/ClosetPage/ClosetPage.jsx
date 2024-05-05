@@ -6,6 +6,7 @@ import ItemList from "../../components/ItemList/ItemList";
 import "./ClosetPage.scss";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 import AddItemModal from "../../components/AddItemModal/AddItemModal";
+import hanger from "../../assets/icons/clothes-hanger.png";
 
 const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
@@ -14,7 +15,6 @@ const ClosetPage = ({ user }) => {
 
     const { userId } = useParams();
     const token = localStorage.getItem("authToken");
-    const navigate = useNavigate();
 
     useEffect (() => {
         const fetchUserItems = async () => {
@@ -24,12 +24,20 @@ const ClosetPage = ({ user }) => {
                     Authorization: `Bearer ${token}`,
                 },
             }
-        );
+            );
+            
+            ////
+            // if (response.status === "403") {
+            //     return (
+            //         <div>Oops! You're not authorized to browse this closet. Add friends to start swapping!</div>
+            //     )
+            // }
             setItems(response.data);
         }
 
         fetchUserItems();
     }, [userId, token]);
+
 
     useEffect (() => {
         const fetchUserName = async () => {
@@ -48,6 +56,7 @@ const ClosetPage = ({ user }) => {
     const handleCloseAddModal = () => {
         setAddModalOpen(false);
     };
+
 
     return (
         <div className="closet">
@@ -78,9 +87,15 @@ const ClosetPage = ({ user }) => {
                     }
                 </section>
             </div>
-            <ItemList
-                data={items}
-            />
+            {Number(userId) === user.id && items.length === 0 ?
+                <div className="placeholder">
+                    <img className="placeholder__icon" src={hanger} alt="https://www.flaticon.com/free-icons/clothing"/>
+                    <h2 className="placeholder__message">Your closet is empty. Add items to see your clothing here!</h2>
+                </div> :
+                <ItemList
+                    data={items}
+                />
+            }
         </div>
     )
 }

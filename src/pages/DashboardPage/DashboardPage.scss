@@ -58,7 +58,7 @@
         @include desk-width;
         padding: 4rem 1.5rem;
         gap: 1rem;
-
+        
         @include tablet {
             flex-direction: row;
             flex-wrap: wrap;
@@ -69,14 +69,19 @@
             padding: 1rem 0;
         }
     }
-
+    
     &__link {
+        cursor: pointer;
         display: block;
         flex-grow: 1;
         height: 30vh;
         max-height: 300px;
         background-color: white;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+        &:hover {
+            box-shadow: rgba(99, 99, 99, 0.6) 0px 2px 8px 0px;
+        }
         
         &--explore {
             background-image: url("../../assets/images/explore-page.jpg");

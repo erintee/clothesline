@@ -17,7 +17,7 @@
         margin: 1rem;
 
         &:hover {
-            border: 0.25px solid $grey;
+            box-shadow: rgba(99, 99, 99, 0.6) 0px 2px 8px 0px;
             color: $teal;
         }
     }

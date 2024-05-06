@@ -17,8 +17,12 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
     
     useEffect(() => {
         const fetchRequest = async () => {
+            const token = localStorage.getItem("authToken");
+
             try {
-                const response = await axios.get(`${BASE_URL}/requests/${requestId}`, config);                
+                const response = await axios.get(`${BASE_URL}/requests/${requestId}`, {
+                    headers: {Authorization: `Bearer ${token}`}
+                });                
                 setItem(response.data)
 
               } catch (error) {
@@ -30,7 +34,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
         fetchRequest();
       }
 
-    });
+    }, [requestId, isOpen]);
 
 
     const cancelRequest = async () => {
@@ -39,6 +43,32 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
             onClose();
         } catch (error) {
             alert("Could not delete request");
+        }
+    }
+
+    const acceptRequest = async () => {
+        const body = {
+            "status": "accepted",
+        }
+
+        try {
+            await axios.put(`${BASE_URL}/requests/${requestId}`, body, config)
+            onClose();
+        } catch (error) {
+            alert("Could not update request");
+        }
+    }
+
+    const declineRequest = async () => {
+        const body = {
+            "status": "declined",
+        }
+
+        try {
+            await axios.put(`${BASE_URL}/requests/${requestId}`, body, config)
+            onClose();
+        } catch (error) {
+            alert("Could not update request");
         }
     }
 
@@ -63,18 +93,15 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
                       <div className='request-modal__actions'>
                           {user.id === item.user1_id ? 
                           <>
-                              <div className="request-modal__buton">
-                                  <ButtonPrimary>Edit</ButtonPrimary>
-                              </div>
                               <div className='request-modal__button' onClick={cancelRequest}>
                                   <ButtonSecondary>Cancel request</ButtonSecondary>
                               </div>
                           </> :
                           <>
-                              <div className='request-modal__button'>
+                              <div className='request-modal__button' onClick={acceptRequest}>
                                   <ButtonPrimary>Accept</ButtonPrimary>
                               </div>
-                              <div className='request-modal__button'>
+                              <div className='request-modal__button' onClick={declineRequest}>
                                   <ButtonSecondary>Decline</ButtonSecondary>
                               </div>
                           </>

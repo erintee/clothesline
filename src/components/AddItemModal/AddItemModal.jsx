@@ -1,6 +1,5 @@
 import "./AddItemModal.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ButtonPrimary from "../ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../ButtonSecondary/ButtonSecondary";
@@ -8,7 +7,6 @@ import FormError from "../FormError/FormError";
 import Modal from "../Modal/Modal";
 
 const AddItemModal = ({ isOpen, onClose, user }) => {
-    const navigate = useNavigate();
 
     const [ image, setImage ] = useState();
     const [ title, setTitle ] = useState("");

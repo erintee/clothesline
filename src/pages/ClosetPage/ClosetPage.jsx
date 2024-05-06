@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 import ItemList from "../../components/ItemList/ItemList";
 import "./ClosetPage.scss";

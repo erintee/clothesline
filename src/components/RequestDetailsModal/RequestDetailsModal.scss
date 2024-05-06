@@ -91,7 +91,7 @@
     &__label {
         display: block;
         @include m-label;
-        margin-bottom: 0.5rem;
+        // margin-bottom: 0.5rem;
 
         @include tablet {
             @include td-label;
@@ -107,6 +107,22 @@
         
         @include tablet {
             @include td-body;
+        }
+    }
+
+    &__tag {
+        display: inline;
+        @include m-label;
+        color: $bittersweet;
+        border-radius: 20%;
+        text-align: right;
+
+        &--accepted {
+            color: $teal;
+        }
+
+        @include tablet {
+            @include td-label;
         }
     }
     

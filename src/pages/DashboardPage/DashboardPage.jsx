@@ -37,7 +37,7 @@ const DashboardPage = ({ user }) => {
         }
 
         fetchRequests();
-    }, []);
+    }, [requests]);
 
     /// CHANGE THIS
     if (!requests.incoming || !requests.outgoing) {

@@ -34,7 +34,6 @@ const DashboardPage = ({ user }) => {
                 },
             })
             setRequests(response.data)
-            // console.log(response.data)
         }
 
         fetchRequests();
@@ -46,9 +45,8 @@ const DashboardPage = ({ user }) => {
     }
     ///
 
+    const { incoming, outgoing, history } = requests;
 
-    const incomingRequests = requests.incoming;
-    const outgoingRequests = requests.outgoing;
 
     return (
         <div className="dashboard">
@@ -72,12 +70,12 @@ const DashboardPage = ({ user }) => {
                         
                         <div className="requests">
                             <p className="dashboard__subheader">Swap</p>
-                            <div className="requests__content-container">
+                            <section className="requests__content-container">
                                 <div className="requests__section">
-                                    <p className="requests__label">{incomingRequests.length} Incoming</p>
+                                    <p className="requests__label">{incoming.length} Incoming</p>
                                     <div className="requests__list">
-                                    {incomingRequests ? 
-                                        incomingRequests.map((item)=> {
+                                    {incoming ? 
+                                        incoming.map((item)=> {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
@@ -93,10 +91,10 @@ const DashboardPage = ({ user }) => {
                                     </div>
                                 </div>
                                 <div className="requests__section">
-                                    <p className="requests__label">{outgoingRequests.length} Outgoing</p>
+                                    <p className="requests__label">{outgoing.length} Outgoing</p>
                                     <div className="requests__list">
-                                    {outgoingRequests ? 
-                                        outgoingRequests.map((item)=> {
+                                    {outgoing ? 
+                                        outgoing.map((item)=> {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
@@ -111,7 +109,26 @@ const DashboardPage = ({ user }) => {
                                     }
                                     </div>
                                 </div>
-                            </div>
+                                <div className="requests__section">
+                                    <p className="requests__label">Request history</p>
+                                    <div className="requests__list">
+                                    {history ? 
+                                        history.map((item)=> {
+                                            return(    
+                                                <RequestItem
+                                                    key={item.id}
+                                                    id={item.id}
+                                                    item={item}
+                                                    user={user}
+                                                    handleOpenRequestModal={handleOpenRequestModal}
+                                                />
+                                            )
+                                        }) :
+                                        <p className="requests__placeholder">You have no outgoing requests</p>
+                                    }
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </section>
                 </div>

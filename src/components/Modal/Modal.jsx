@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { ReactComponent as Close } from '../../assets/icons/close-24px.svg'
 import './Modal.scss';
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
-import ButtonSecondary from '../ButtonSecondary/ButtonSecondary';
 
 
 export default function Modal ({ isOpen, onClose, children, handleSubmit, buttonText }) {

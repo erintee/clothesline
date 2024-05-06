@@ -1,0 +1,55 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.request-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    
+    @include tablet {
+        width: 200px;
+        border-radius: 8px;
+        margin: 0 0.5rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+        &:hover {
+            box-shadow: rgba(99, 99, 99, 0.6) 0px 2px 8px 0px;
+            color: $teal;
+        }
+    }
+
+    &__image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 200px;
+        background-color: $grey-background;
+    
+        @include tablet {
+            border-radius: 8px 8px 0 0 ;
+        }
+    }
+    
+    &__image {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    &__text-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 1rem;
+    }
+
+    &__user {
+        @include m-body;
+        color: grey;
+    }
+}

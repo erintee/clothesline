@@ -3,6 +3,7 @@ import "./DashboardPage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import RequestItem from "../../components/RequestItem/RequestItem";
 
 
 const DashboardPage = ({ user }) => {
@@ -24,9 +25,15 @@ const DashboardPage = ({ user }) => {
         fetchRequests();
     }, []);
 
+    /// CHANGE THIS
     if (!requests.incoming || !requests.outgoing) {
         return <>Loading</>
     }
+    ///
+
+
+    const incomingRequests = requests.incoming;
+    const outgoingRequests = requests.outgoing;
 
     return (
         <div className="dashboard">
@@ -42,22 +49,42 @@ const DashboardPage = ({ user }) => {
                             <p className="dashboard__subheader">My closet</p>
                         </div>
                         
-                        <div className="dashboard__link dashboard__link--requests">
+                        <div className="requests">
                             <p className="dashboard__subheader">Swap</p>
-                            <div className="requests">
+                            <div className="requests__content-container">
                                 <div className="requests__section">
-                                    <span 
-                                        className="requests__alert">
-                                        {requests.incoming.length}
-                                    </span>
-                                    <p className="requests__label">incoming</p>
+                                    <p className="requests__label">{incomingRequests.length} Incoming</p>
+                                    <div className="requests__list">
+                                    {incomingRequests ? 
+                                        incomingRequests.map((item)=> {
+                                            return(    
+                                                <RequestItem
+                                                    key={item.id}
+                                                    item={item}
+                                                    user={user}
+                                                />
+                                            )
+                                        }) :
+                                        <p className="requests__placeholder">You have no incoming requests</p>
+                                    }
+                                    </div>
                                 </div>
                                 <div className="requests__section">
-                                <span 
-                                        className="requests__alert">
-                                        {requests.outgoing.length}
-                                    </span>
-                                    <p className="requests__label">outgoing</p>
+                                    <p className="requests__label">{outgoingRequests.length} Outgoing</p>
+                                    <div className="requests__list">
+                                    {outgoingRequests ? 
+                                        outgoingRequests.map((item)=> {
+                                            return(    
+                                                <RequestItem
+                                                    key={item.id}
+                                                    item={item}
+                                                    user={user}
+                                                />
+                                            )
+                                        }) :
+                                        <p className="requests__placeholder">You have no outgoing requests</p>
+                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>

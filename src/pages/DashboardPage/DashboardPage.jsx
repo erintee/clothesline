@@ -1,25 +1,40 @@
-import { useNavigate } from "react-router-dom";
-import "./DashboardPage.scss";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./DashboardPage.scss";
 import { BASE_URL } from "../../utils/utils";
 import RequestItem from "../../components/RequestItem/RequestItem";
+import RequestDetailsModal from "../../components/RequestDetailsModal/RequestDetailsModal";
 
 
 const DashboardPage = ({ user }) => {
     const navigate = useNavigate();
     const [ requests, setRequests ] = useState([]);
+    const [ requestModalOpen, setRequestModalOpen ] = useState(false);
+    const [ selectedRequest, setSelectedRequest ] = useState("");
+  
+    const handleOpenRequestModal = (event) => {
+        const id = event.currentTarget.id;
+        setSelectedRequest(id);
+        window.scrollTo(0,0);
+        setRequestModalOpen(true);
+    };
+  
+    const handleCloseRequestModal = () => {
+        setRequestModalOpen(false);
+    };
 
     useEffect(() =>{
         const fetchRequests = async () => {
             const token = localStorage.getItem("authToken");
-            const response = await axios.get(`${BASE_URL}/requests/${user.id}`,
+            const response = await axios.get(`${BASE_URL}/requests/`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
             setRequests(response.data)
+            // console.log(response.data)
         }
 
         fetchRequests();
@@ -37,6 +52,12 @@ const DashboardPage = ({ user }) => {
 
     return (
         <div className="dashboard">
+            <RequestDetailsModal
+                isOpen={requestModalOpen}
+                onClose={handleCloseRequestModal}
+                requestId={selectedRequest}
+                user={user}
+            />
             <div className="dashboard__background"></div>
             <section className="dashboard__content">
                 <h1 className="dashboard__greeting">What are you wearing today?</h1>
@@ -60,8 +81,10 @@ const DashboardPage = ({ user }) => {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
+                                                    id={item.id}
                                                     item={item}
                                                     user={user}
+                                                    handleOpenRequestModal={handleOpenRequestModal}
                                                 />
                                             )
                                         }) :
@@ -77,8 +100,10 @@ const DashboardPage = ({ user }) => {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
+                                                    id={item.id}
                                                     item={item}
                                                     user={user}
+                                                    handleOpenRequestModal={handleOpenRequestModal}
                                                 />
                                             )
                                         }) :

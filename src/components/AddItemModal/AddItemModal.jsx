@@ -55,10 +55,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         const config = {headers: {'Content-Type': 'multipart/form-data'}}
 
         try {
-            const response = await axios.post('http://localhost:8080/api/items', formData, config);
-            if (response.status === 201) {
-                navigate(-1);
-            }
+            await axios.post('http://localhost:8080/api/items', formData, config);
         } catch (error) {
             console.error(error);
         }

@@ -50,7 +50,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
       }
 
     } catch (error) {
-      console.error('Could not delete warehouse', error)
+      console.error('Could not send request', error)
     }
   }
   

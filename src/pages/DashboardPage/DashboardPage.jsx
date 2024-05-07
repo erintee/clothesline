@@ -9,10 +9,27 @@ import RequestDetailsModal from "../../components/RequestDetailsModal/RequestDet
 
 const DashboardPage = ({ user }) => {
     const navigate = useNavigate();
-    const [ requests, setRequests ] = useState([]);
     const [ requestModalOpen, setRequestModalOpen ] = useState(false);
     const [ selectedRequest, setSelectedRequest ] = useState("");
+    const [ requests, setRequests ] = useState([]);
+    const { incoming, outgoing, history } = requests;
   
+    
+    const fetchRequests = async () => {
+        const token = localStorage.getItem("authToken");
+        const response = await axios.get(`${BASE_URL}/requests/`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        setRequests(response.data)
+    }
+    
+    useEffect(() =>{
+        fetchRequests();
+    }, []);
+    
     const handleOpenRequestModal = (event) => {
         const id = event.currentTarget.id;
         setSelectedRequest(id);
@@ -22,30 +39,12 @@ const DashboardPage = ({ user }) => {
   
     const handleCloseRequestModal = () => {
         setRequestModalOpen(false);
-    };
-
-    useEffect(() =>{
-        const fetchRequests = async () => {
-            const token = localStorage.getItem("authToken");
-            const response = await axios.get(`${BASE_URL}/requests/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            setRequests(response.data)
-        }
-
         fetchRequests();
-    }, [requests]);
-
-    /// CHANGE THIS
-    if (!requests.incoming || !requests.outgoing) {
+    };
+    
+    if (!requests.incoming || !requests.outgoing || !requests.history) {
         return <>Loading</>
     }
-    ///
-
-    const { incoming, outgoing, history } = requests;
 
 
     return (
@@ -74,8 +73,7 @@ const DashboardPage = ({ user }) => {
                                 <div className="requests__section">
                                     <p className="requests__label">{incoming.length} Incoming</p>
                                     <div className="requests__list">
-                                    {incoming ? 
-                                        incoming.map((item)=> {
+                                        {incoming.map((item)=> {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
@@ -85,16 +83,13 @@ const DashboardPage = ({ user }) => {
                                                     handleOpenRequestModal={handleOpenRequestModal}
                                                 />
                                             )
-                                        }) :
-                                        <p className="requests__placeholder">You have no incoming requests</p>
-                                    }
+                                        })}
                                     </div>
                                 </div>
                                 <div className="requests__section">
                                     <p className="requests__label">{outgoing.length} Outgoing</p>
                                     <div className="requests__list">
-                                    {outgoing ? 
-                                        outgoing.map((item)=> {
+                                        {outgoing.map((item)=> {
                                             return(    
                                                 <RequestItem
                                                     key={item.id}
@@ -104,15 +99,13 @@ const DashboardPage = ({ user }) => {
                                                     handleOpenRequestModal={handleOpenRequestModal}
                                                 />
                                             )
-                                        }) :
-                                        <p className="requests__placeholder">You have no outgoing requests</p>
-                                    }
+                                        })}
                                     </div>
                                 </div>
                                 <div className="requests__section">
                                     <p className="requests__label">Request history</p>
                                     <div className="requests__list">
-                                    {history ? 
+                                    {history.length > 0 ? 
                                         history.map((item)=> {
                                             return(    
                                                 <RequestItem
@@ -124,7 +117,7 @@ const DashboardPage = ({ user }) => {
                                                 />
                                             )
                                         }) :
-                                        <p className="requests__placeholder">You have no outgoing requests</p>
+                                        <p className="requests__placeholder">Try browsing your friends' closets to plan your first swap!</p>
                                     }
                                     </div>
                                 </div>

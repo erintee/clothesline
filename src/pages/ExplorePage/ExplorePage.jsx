@@ -1,22 +1,24 @@
-import axios from 'axios';
 import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
-import ItemList from "../../components/ItemList/ItemList";
+import axios from 'axios';
 import { BASE_URL } from '../../utils/utils';
 import './ExplorePage.scss';
-import filterIcon from '../../assets/icons/filter-icon.svg';
-import ButtonSecondary from '../../components/ButtonSecondary/ButtonSecondary';
 import ItemDetailsModal from '../../components/ItemDetailsModal/ItemDetailsModal';
+import filterIcon from '../../assets/icons/filter-icon.svg';
+import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
+import ButtonSecondary from '../../components/ButtonSecondary/ButtonSecondary';
+import ItemList from "../../components/ItemList/ItemList";
 
 const ExplorePage = ({user}) => {
     const [ data, setData ] = useState([]);
+
     const [ isFilterVisible, setIsFilterVisible ] = useState(false);
     const [ type, setType ] = useState("");
     const [ colour, setColour] = useState("");
     const [ size, setSize ] = useState("");
     const [ queryStr, setQueryStr ] = useState("");
     let [ searchParams, setSearchParams ] = useSearchParams();
+    
     const [ itemModalOpen, setItemModalOpen ] = useState(false);
     const [ selectedItem, setSelectedItem ] = useState("");
   
@@ -29,7 +31,6 @@ const ExplorePage = ({user}) => {
     const handleCloseItemModal = () => {
         setItemModalOpen(false);
     };
-
 
     const fetchData = useCallback( async () => {
         try {

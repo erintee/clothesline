@@ -17,7 +17,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
     const [ error, setError ] = useState(false);
 
     const isFormValid = () => {
-        if (!title || !type || !colour || !size) {
+        if (!title || !type || !colour || !size || !filename) {
             setError(true);
             return false;
         }
@@ -178,6 +178,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                             }}
                         />
                     </label>
+                    <FormError errorState={error} field={filename}>Please upload a photo</FormError>
+
                     <div className="form__buttons">
                         <ButtonPrimary
                             type="submit"

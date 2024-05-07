@@ -91,7 +91,6 @@
     &__label {
         display: block;
         @include m-label;
-        // margin-bottom: 0.5rem;
 
         @include tablet {
             @include td-label;

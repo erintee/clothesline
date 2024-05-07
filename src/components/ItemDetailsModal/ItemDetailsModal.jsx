@@ -39,15 +39,11 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
         "message": message
       }
 
-      const response = await axios.post(`${BASE_URL}/requests/${id}`, body, {
+      await axios.post(`${BASE_URL}/requests/${id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
         });
-      
-      if(response.status === 201){
-        //put a success message here?
-      }
 
     } catch (error) {
       console.error('Could not send request', error)

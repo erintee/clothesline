@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
-import ItemList from "../../components/ItemList/ItemList";
 import "./ClosetPage.scss";
+import ItemList from "../../components/ItemList/ItemList";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 import AddItemModal from "../../components/AddItemModal/AddItemModal";
 import hanger from "../../assets/icons/clothes-hanger.png";
@@ -12,13 +12,14 @@ const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
     const [ userName, setUserName ] = useState("");
     const [ addModalOpen, setAddModalOpen ] = useState(false);
+    const [ authorized, setAuthorized ] = useState(false);
 
     const { userId } = useParams();
-    const token = localStorage.getItem("authToken");
-
+    
     useEffect (() => {
         const fetchUserItems = async () => {
             try {
+                const token = localStorage.getItem("authToken");
                 const response = await axios.get(`${BASE_URL}/users/${userId}/items`,
                 {
                     headers: {
@@ -26,19 +27,16 @@ const ClosetPage = ({ user }) => {
                     },
                 }
                 );
-                
+                setAuthorized(true);
                 setItems(response.data);
+                
             } catch (error) {
-                if (error.response.status === 403) {
-                    return (
-                        <div>Oops! You're not authorized to browse this closet. Add friends to start swapping!</div>
-                    )
-                }                
+                console.log(error)              
             }
         }
 
         fetchUserItems();
-    }, [userId, items]);
+    }, [userId]);
 
 
     useEffect (() => {
@@ -51,6 +49,7 @@ const ClosetPage = ({ user }) => {
         fetchUserName();
     }, [userId]);
 
+
     const handleOpenAddModal = (event) => {
         setAddModalOpen(true);
     };
@@ -59,6 +58,14 @@ const ClosetPage = ({ user }) => {
         setAddModalOpen(false);
     };
 
+    if (!authorized) {
+        return (
+            <div className="unauthorized">
+                <h1>Oops!</h1>
+                <p>Looks like you're not friends with this user. Add friends on ClothesLine to start swapping!</p>
+            </div>
+        )
+    }
 
     return (
         <div className="closet">

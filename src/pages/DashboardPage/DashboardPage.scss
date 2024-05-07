@@ -49,7 +49,6 @@
         align-items: center;
         background-color: $off-white-transparent;
         padding: 3rem 0;
-        // height: 100%;
     }
 
     &__actions {
@@ -69,7 +68,7 @@
         
         @include desktop {
             justify-content: space-evenly;
-            padding: 1rem 0;
+            padding: 0;
         }
     }
     
@@ -108,7 +107,6 @@
 }
 
 .requests {
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -132,7 +130,6 @@
         @include tablet {
             flex-direction: row;
         }
-        
     }
 
     &__section {
@@ -160,6 +157,16 @@
         @include tablet {
             gap: 0.5rem;
             padding: 1rem 0;
+        }
+    }
+
+    &__placeholder {
+        padding: 0.5rem 1rem;
+        @include m-body;
+
+        @include tablet {
+            @include td-body;
+            padding: 0 1rem;
         }
     }
 }

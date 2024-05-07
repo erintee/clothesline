@@ -40,13 +40,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+
         <Header
           user={user}
           setUser={setUser}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />
-
+        
         <Routes>
           <Route path='/' element={isLoggedIn ? 
             <DashboardPage user={user} /> : 
@@ -62,8 +63,8 @@ function App() {
             <ExplorePage user={user}/> :
             <AuthPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} >
           </Route>
-          
         </Routes>
+
       </BrowserRouter>
     </div>
   );

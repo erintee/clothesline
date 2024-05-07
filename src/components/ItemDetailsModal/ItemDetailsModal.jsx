@@ -43,14 +43,14 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
         headers: {
           Authorization: `Bearer ${token}`,
         }
-        });
-
+      });
+      setMessage("");
     } catch (error) {
       console.error('Could not send request', error)
     }
   }
   
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     sendRequest(itemId);
     onClose();
   }

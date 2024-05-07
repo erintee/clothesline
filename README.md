@@ -53,12 +53,13 @@ npm start
 npm install
 ```
 
-3. Set up a local SQL database called "clothesline", then run:
+3. Set up a new .env file and copy variables from .env.sample
+
+4. Set up a local database in accordance with the DB_NAME in your .env file, then run:
 ```
 npx knex migrate:latest
 npx knex seed:run
 ```
-4. Set up a new .env file and copy variables from .env.sample
 
 5. To start up the server, run:
 ```

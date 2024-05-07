@@ -1,38 +1,69 @@
-# Project Title
-ClothesLine
+![](./readme-images/readme-logo.png)
+
 
 ## Overview
-ClothesLine lets you connect with your friends and share clothing.
+ClothesLine is a platform that allows users to connect with friends and community by sharing clothing and accessories.
 
-### Problem
-The shift toward more compact, high-density housing models, as well as trends in sustainability and waste-reduction, have impacted how consumers are able to buy and store their wardrobes. Many people are shifting toward either paring down their wardrobes, and thus their fashion choices, or sourcing extra storage in order to maintain their larger wardrobe. ClothesLine would allow people to have smaller individual wardrobes while continuing to have access to a variety of styles via their larger clothing network.
+### Why Clothesline?
+The shift toward more compact, high-density housing models, as well as trends in sustainability and waste-reduction, have impacted how consumers are able to buy and store their wardrobes. Many people are shifting toward either paring down their wardrobes, and thus their fashion choices, or sourcing extra storage in order to maintain their larger wardrobe. ClothesLine allows users to have smaller individual wardrobes while continuing to have access to a variety of styles via their larger clothing network.
 
-### User Profile
+### Who is this made for?
 ClothesLine is made for friends, families, and small communities who want to build a connected, trusting space to share clothing with each other. Users who are looking to minimize their purchasing or downsize their closet will benefit from the endless possibilities that come from sharing different styles with others.
 
 ### Features
-- Once logged in, users can:
-    - Add items to their closet
-    - Browse their friends' closets
-    - Search for specific styles
-    - Request items from friends
-    - Respond to requests from friends
+
+<p style="text-align: center">
+  <img src="./readme-images/login.jpg" width="45%" style="margin: 0 0.5rem"/>
+  <img src="./readme-images/dashboard.jpg" width="45%" style="margin: 0 0.5rem"/> 
+</p>
+
+<p style="text-align: center">
+  <img src="./readme-images/requests.jpg" width="45%" style="margin: 0 0.5rem" />
+  <img src="./readme-images/item-details.jpg" width="45%" style="margin: 0 0.5rem" /> 
+</p>
+
+<p style="text-align: center">
+  <img src="./readme-images/explore.jpg" width="45%" style="margin: 0 0.5rem" /> 
+  <img src="./readme-images/my-closet.jpg" width="45%" style="margin: 0 0.5rem" />
+</p>
 
 ## Installation
 
 ### Client:
-- npm install
-- if needed, modify BASE_URL in utils.js to match server port
-- npm start
-- you can register a new user, though you won't be able to make any new connections on the app and will therefore have quite limited functionality (limited to adding your own items)
-- for full functionality, try logging in with user 1 (jane.sample@email.com, password 123456)
+1. All dependencies will be included in the package.json file. To get started, run:
+```
+npm install
+```
+
+2. The BASE_URL has been set to port 8080 in the utils.js file. If needed, change this.
+
+3. Once dependecies have been installed, start up the application by running:
+```
+npm start
+```
+4. You will be able to register as a new user and access basic functions, including your personal closet and item upload. However, as functionality for adding friends has not been implemented, you will need to log in as an existing user in order to sample full functionality.
+**Note:** Password encryption has **not** been implemented, and sample user login details can be found in the server seed files.
 
 ### Server:
-- npm install
-- set up a local database called "clothesline"
-- npx knex migrate:latest
-- npx knex seed:run
-- set up a new .env file and copy variables from .env.sample
+
+1. Ensure to have Nodejs installed.
+
+2. All dependencies will be included in the package.json file. To get started, run:
+```
+npm install
+```
+
+3. Set up a local SQL database called "clothesline", then run:
+```
+npx knex migrate:latest
+npx knex seed:run
+```
+4. Set up a new .env file and copy variables from .env.sample
+
+5. To start up the server, run:
+```
+node server.js
+```
 
 ## Implementation
 
@@ -65,25 +96,6 @@ ClothesLine is made for friends, families, and small communities who want to bui
     - Click individual items to send a request to friends
 - Closet pages:
     - Browse the items that one friend has uploaded to their closet
-
-### Screenshots
-
-#### Dashboard Page
-![](./readme-images/dashboard-mobile.png)
-
-#### My Closet Page
-![](./readme-images/my-closet-mobile.png)
-
-#### Explore Page
-![](./readme-images/explore-desktop.png)
-
-#### Requests
-![](./readme-images/requests-mobile.png)
-
-
-### Data
-
-![](./readme-images/db-chart.png)
 
 ### Endpoints
 
@@ -367,7 +379,7 @@ Response:
 
 
 ## Next steps
-
+- Password encryption for user database
 - Implement searching for and adding friends
 - Implement editing and deleting items from closet
 - Add date field when sending a request

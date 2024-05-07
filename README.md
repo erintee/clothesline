@@ -24,6 +24,8 @@ ClothesLine is made for friends, families, and small communities who want to bui
 - npm install
 - if needed, modify BASE_URL in utils.js to match server port
 - npm start
+- you can register a new user, though you won't be able to make any new connections on the app and will therefore have quite limited functionality (limited to adding your own items)
+- for full functionality, try logging in with user 1 (jane.sample@email.com, password 123456)
 
 ### Server:
 - npm install

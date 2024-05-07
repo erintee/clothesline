@@ -32,7 +32,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         setSize("");
     }
 
-    const addItem = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const valid = isFormValid();
 
@@ -54,15 +54,10 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
 
         try {
             await axios.post('http://localhost:8080/api/items', formData, config);
+            onClose();
         } catch (error) {
             console.error(error);
         }
-        
-    }
-    
-    const handleSubmit = () => {
-        addItem();
-        onClose();
     }
 
     return (

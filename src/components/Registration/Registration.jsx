@@ -4,6 +4,7 @@ import './Registration.scss';
 import { BASE_URL } from '../../utils/utils';
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import FormError from '../../components/FormError/FormError';
+import ErrorIcon from '../../assets/icons/error-24px.svg';
 
 const Registration = ({ setIsRegistered }) => {
     const [ firstName, setFirstName ] = useState("");
@@ -12,6 +13,7 @@ const Registration = ({ setIsRegistered }) => {
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ error, setError ] = useState(false);
+    const [ existingUser, setExistingUser ] = useState(false);
     
 
     const isFormValid = () => {
@@ -39,12 +41,16 @@ const Registration = ({ setIsRegistered }) => {
                 
                 const response = await axios.post(`${BASE_URL}/auth/register`, newUser);
 
+                
                 if(response.data.success) {
                     console.log("Successfully signed up");
                     setIsRegistered(true);
                 }
-
+                
             } catch (error) {
+                if(error.response.data === "User already exists") {
+                    setExistingUser(true);
+                }
                 console.error("Registration failed: ", error);
             }
         }
@@ -80,6 +86,12 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormError errorState={error} field={email}>Please enter a valid email address</FormError>
+                    {existingUser && (
+                        <span className='input-error'>
+                            <img className='input-error__icon' src={ErrorIcon} alt='ErrorIcon'></img>
+                            <p className='input-error__message'>An account with this email already exists</p>
+                        </span>
+                    )}
                 
                 <label className="registration-form__label">Password:</label>
                     <input 

@@ -18,25 +18,27 @@ const ClosetPage = ({ user }) => {
 
     useEffect (() => {
         const fetchUserItems = async () => {
-            const response = await axios.get(`${BASE_URL}/users/${userId}/items`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            try {
+                const response = await axios.get(`${BASE_URL}/users/${userId}/items`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+                );
+                
+                setItems(response.data);
+            } catch (error) {
+                if (error.response.status === 403) {
+                    return (
+                        <div>Oops! You're not authorized to browse this closet. Add friends to start swapping!</div>
+                    )
+                }                
             }
-            );
-            
-            ////
-            // if (response.status === "403") {
-            //     return (
-            //         <div>Oops! You're not authorized to browse this closet. Add friends to start swapping!</div>
-            //     )
-            // }
-            setItems(response.data);
         }
 
         fetchUserItems();
-    }, [userId, token]);
+    }, [userId, items]);
 
 
     useEffect (() => {

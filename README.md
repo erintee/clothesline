@@ -18,6 +18,20 @@ ClothesLine is made for friends, families, and small communities who want to bui
     - Request items from friends
     - Respond to requests from friends
 
+## Installation
+
+### Client:
+- npm install
+- if needed, modify BASE_URL in utils.js to match server port
+- npm start
+
+### Server:
+- npm install
+- set up a local database called "clothesline"
+- npx knex migrate:latest
+- npx knex seed:run
+- set up a new .env file and copy variables from .env.sample
+
 ## Implementation
 
 ### Tech Stack

@@ -11,11 +11,6 @@
     @include tablet {
         height: 80px;
     }
-
-    @include desktop {
-        position: fixed;
-
-    }
     
     &__content {
         display: flex;

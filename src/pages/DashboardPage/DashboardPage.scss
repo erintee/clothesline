@@ -6,11 +6,6 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-
-    @include desktop {
-        position: relative;
-        top: 80px;
-    }
     
     &__background {
         position: fixed;

@@ -3,12 +3,6 @@
 
 .closet {
     padding-top: 1rem;
-    @include tablet {
-    }
-
-    @include desktop {
-        padding-top: 6rem;
-    }
     
     &__header-container {
         padding: 1rem 0;

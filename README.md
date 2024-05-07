@@ -8,14 +8,15 @@ ClothesLine lets you connect with your friends and share clothing.
 The shift toward more compact, high-density housing models, as well as trends in sustainability and waste-reduction, have impacted how consumers are able to buy and store their wardrobes. Many people are shifting toward either paring down their wardrobes, and thus their fashion choices, or sourcing extra storage in order to maintain their larger wardrobe. ClothesLine would allow people to have smaller individual wardrobes while continuing to have access to a variety of styles via their larger clothing network.
 
 ### User Profile
-Friends and small communities
-- People who want to cut down on their warddrobe without cutting down on their options
-- Enjoys wearing different things / trying new styles
+ClothesLine is made for friends, families, and small communities who want to build a connected, trusting space to share clothing with each other. Users who are looking to minimize their purchasing or downsize their closet will benefit from the endless possibilities that come from sharing different styles with others.
 
 ### Features
-- As a logged in user, I want to easily add clothing items to my online closet
-- As a logged in user, I want to connect with friends' accounts to see their closets
-- As a logged in user, I want to search for items within my community according to parameters
+- Once logged in, users can:
+    - Add items to their closet
+    - Browse their friends' closets
+    - Search for specific styles
+    - Request items from friends
+    - Respond to requests from friends
 
 ## Implementation
 
@@ -39,38 +40,41 @@ Friends and small communities
 ### Sitemap
 - Register
 - Login
-- User Dashboard ?
-- Item pages
-    - browse all items
-    - see results based on search queries
-- Closet pages (user-specific item pages)
-    - My Closet (with Add Item page)
-    - Friend's closet
-- Friend/Closet list (list of friends that links to their wardrobe)
+- User Dashboard
+- My Closet page:
+    - View uploaded items
+    - Upload new items
+- Explore page:
+    - Browse all friends' items with the option of filtering for specific styles or sizes
+    - Click individual items to send a request to friends
+- Closet pages:
+    - Browse the items that one friend has uploaded to their closet
 
-### Mockups
+### Screenshots
 
 #### Dashboard Page
-![](./images/dashboard.jpeg)
+![](./readme-images/dashboard-mobile.png)
 
-#### My Closet Page / Add Item Page
-![](./images/my-closet.jpeg)
+#### My Closet Page
+![](./readme-images/my-closet-mobile.png)
 
-#### Browse Closet Page
-![](./images/search-browse.jpeg)
+#### Explore Page
+![](./readme-images/explore-desktop.png)
 
-#### Search Form
-![](./images/search-form.jpg)
+#### Requests
+![](./readme-images/requests-mobile.png)
 
 
 ### Data
 
-![](./images/sql-diagram.png)
+![](./readme-images/db-chart.png)
 
 ### Endpoints
 
+**ITEM Routes**
+
 **GET /items**
-- Get a list of items
+- Get a list of friends' items
 
 Parameters:
 - JWT
@@ -82,58 +86,33 @@ Response:
 ```
 [
     {
-        "id":1,
-        "user_id": 1,
-        "title": "Black heels",
-        "type": "shoes",
-        "colour": "black",
-        "size": "9",
-        "image": "image.jpg",
+        "id": 8,
+        "title": "Long wool dresscoat",
+        "size": "L/10/30",
+        "image": "wool-coat.png",
+        "first_name": "Evelyn"
     },
     {
-        "id":46,
-        "user_id": 5,
-        "title": "Leather flats",
-        "type": "shoes",
-        "colour": "black",
-        "size": "9",
-        "image": "image.jpg",
+        "id": 9,
+        "title": "Pleated skirt",
+        "size": "XS/2/26",
+        "image": "pleat-skirt.png",
+        "first_name": "Zhenyi"
     },
     ...
 ]
 ```
-
-**GET /items/:itemId**
-- Get an item's details
-
-Parameters:
-- item id
-
-Response:
-```
-{
-    "id": 1,
-    "title": "Black heels",
-    "type": "shoes",
-    "colour": "black",
-    "size": "9/41",
-    "image": "image.jpg",
-    "first_name": "Candace",
-}
-```
-If id not found, 404. If successful, 201.
 
 **POST /items**
 - Add an item to your closet
 
 Parameters:
 - user id
-- JWT
 - title
 - type
 - colour
 - size
-- photo
+- image
 
 Response:
 ```
@@ -148,39 +127,57 @@ Response:
 }
 ```
 
-<!-- **GET /users**
-- Get all friends
+**GET /items/:itemId**
+- Get an item's details
 
 Parameters:
+- item id
 - JWT
-
-Response body:
-```
-[
-    {
-        "id": 1,
-        "first_name": "Mark",
-    },
-    {
-        "id", 2,
-        "first_name": "Elise",
-    },
-    ...
-]
-``` -->
-
-**GET /users/:userId**
-- Get user's information/profile; used in tandem with /:userId/items endpoint to display a user's closet
-
-Parameters:
-- user id
 
 Response:
 ```
 {
-    "id": 1,
-    "username": "user123", 
-    "email":"user@email.com",
+    "id": 8,
+    "title": "Long wool dresscoat",
+    "type": "outerwear",
+    "colour": "brown",
+    "size": "L/10/30",
+    "image": "wool-coat.png",
+    "user_id": 3,
+    "first_name": "Evelyn"
+}
+```
+---
+**USER Routes**
+
+**GET /users/active**
+- Get active user after login
+
+Parameters:
+- JWT
+
+Response:
+```
+{
+    "firstName": "Jane",
+    "lastName": "Sample",
+    "email": "jane.sample@email.com",
+    "id": 1
+}
+```
+
+**GET /:userId**
+- Get user's name
+
+Parameters:
+- user id
+- JWT
+
+Response:
+```
+{
+    "first_name": "Grace",
+    "last_name": "Hopper"
 }
 ```
 
@@ -195,49 +192,149 @@ Parameters:
 Response:
 ```
 [
-    {
-        "id":1,
-        "username": "user123"
-        "type": "shoes",
-        "colour": "black",
-        "size": "9",
-        "image": "image.jpg"
-    },
-    {
-        "id":2,
-        "username": "user123"
-        "type": "earrings",
-        "colour": "gold",
-        "size": "N/A",
-        "image": "image.jpg"
-    },
+  {
+    "id": 9,
+    "title": "Pleated skirt",
+    "type": "skirt",
+    "colour": "green",
+    "size": "XS/2/26",
+    "image": "pleat-skirt.png"
+  },
+  {
+    "id": 10,
+    "title": "DW Watch",
+    "type": "accessory",
+    "colour": "gold",
+    "size": "N/A",
+    "image": "dw-watch.png"
+  },
     ...
 ]
 ```
+---
+**REQUEST Routes**
 
-**POST /register**
-
-- Add a user account
+**GET /requests**
+- Get all requests associated with active user
 
 Parameters:
-- username: User chosen display name
-- email: User's email
-- password: User's provided password
+- JWT
 
 Response:
 ```
 {
-    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+    "incoming": [
+    {
+        "id": 4,
+        "user1_id": 3,
+        "title": "Parka",
+        "image": "parka.jpg",
+        "first_name": "Evelyn"
+    }
+    ],
+    "outgoing": [
+    {
+        "id": 1,
+        "user1_id": 1,
+        "title": "Winter boots",
+        "image": "boots.jpg",
+        "first_name": "Misty"
+    },
+    ],
+    "history": ...
 }
 ```
 
-**POST /login**
+**GET /requests/:requestId**
+- Get request details
+
+Parameters:
+- JWT
+
+Response:
+```
+{
+  "id": 3,
+  "item_id": 2,
+  "user1_id": 3,
+  "message": "Hi! Can I borrow these for Sam's wedding?",
+  "status": "accepted",
+  "title": "Black pumps",
+  "size": "9",
+  "image": "black-shoes.png",
+  "first_name": "Evelyn"
+}
+```
+
+**DELETE /requests/:requestId**
+- Cancel a pending outgoing request
+
+Parameters:
+- JWT
+
+**PUT /requests/:requestId**
+- Accept or decline a pending incoming request
+
+Parameters:
+- JWT
+
+Response:
+```
+{
+  "id": 3,
+  "user1_id": 3,
+  "user2_id": 1,
+  "item_id": 2,
+  "message": "Hi! Can I borrow these for Sam's wedding?",
+  "status": "declined",
+  "date": "1706809948000"
+}
+```
+
+**POST /requests/:itemId**
+- Send a request
+
+Parameters:
+- JWT
+
+```
+{
+  "id": 7,
+  "user1_id": 1,
+  "user2_id": 2,
+  "item_id": 4,
+  "message": "Can I please borrow this next week?",
+  "status": "pending",
+  "date": "1715059025542"
+}
+```
+
+---
+**AUTH Routes**
+
+**POST /auth/register**
+- Register a new user
+
+Parameters:
+- first_name, last_name, email, password
+
+Response:
+```
+{
+  "id": 6,
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "jdoe@email.com",
+  "password": "123456"
+}
+```
+
+**POST /auth/login**
 
 - Login a user
 
 Parameters:
-- email: User's email
-- password: User's provided password
+- email, password
 
 Response:
 ```
@@ -250,80 +347,12 @@ Response:
 ### Auth
 
 - JWT auth
-    - Before adding auth, all API requests will be using a fake user with id 1
-    - Added after core features have first been implemented
     - Store JWT in localStorage, remove when a user logs out
 
 
-## Roadmap
+## Next steps
 
-- Create client
-    - react project with routes and boilerplate pages
-
-- Create server
-    - express project with routing, with placeholder 200 responses
-
-- Create migrations
-
-- Create seeds for:
-    - users
-    - clothing items
-    - friendships - include at least one sample friendship between two users
-
-- Deploy client and server projects so all commits will be reflected in production
-
-- Feature: Get user by id
-    - Create GET /users/:userId endpoint
-    - Implement basic structure of user profile (closet page)
-
-- Feature: Get items
-    - Create GET /items endpoint
-    - Implement browse/explore page (list of all items)
-        - ItemsList component
-        - Item component
-
-- Feature: View item
-    - Implement item details page
-    - Link to existing Item component
-    - Create GET /items/:itemId endpoint
-
-- Feature: Get items by user id
-    - Create GET /users/:userId/items endpoint
-    - Reuse ItemsList component in user profile
-
-- Feature: Add item
-    - Implement Add Item page/form
-    - Create POST /items endpoint
-
-- Feature: Dashboard
-    - Links to:
-        - Search form (search items)
-        - Explore page (all items) 
-        - My closet (user's items)
-        - Add item (to user's own closet)
-
-- Feature: Create account
-    - Implement register page + form
-    - Create POST /users/register endpoint
-
-- Feature: Login
-    - Implement login page + form
-    - Create POST /users/login endpoint
-
-- Feature: Implement JWT tokens
-    - Server: Update expected requests / responses on protected endpoints
-    - Client: Store JWT in local storage, include JWT on axios calls
-
-- Feature: Friends page
-    - Implement friend list page (links to friends' closets)
-    - Create GET /users endpoint
-
-- Bug fixes
-
-- DEMO DAY
-
-## Nice-to-haves
-
-- Implement requesting items from friends 
-- Implement adding friends (seeded in first sprint)
+- Implement searching for and adding friends
+- Implement editing and deleting items from closet
+- Add date field when sending a request
 - Forgot password functionality

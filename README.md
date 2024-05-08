@@ -42,7 +42,7 @@ npm install
 npm start
 ```
 4. You will be able to register as a new user and access basic functions, including your personal closet and item upload. However, as functionality for adding friends has not been implemented, you will need to log in as an existing user in order to sample full functionality.
-**Note:** Password encryption has **not** been implemented, and sample user login details can be found in the server seed files.
+**Note:** While seeded user passwords are stored in plain text, new users' passwords are encrypted upon registration.
 
 ### Server:
 
@@ -81,6 +81,7 @@ node server.js
     - knex
     - express
     - multer
+    - bcrypt
 
 ### APIs
 - No external APIs
@@ -380,7 +381,6 @@ Response:
 
 
 ## Next steps
-- Password encryption for user database
 - Implement searching for and adding friends
 - Implement editing and deleting items from closet
 - Add date field when sending a request

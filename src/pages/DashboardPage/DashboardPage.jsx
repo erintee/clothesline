@@ -43,7 +43,7 @@ const DashboardPage = ({ user }) => {
     };
     
     if (!requests.incoming || !requests.outgoing || !requests.history) {
-        return <>Loading</>
+        return <span className="loader"></span>
     }
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import "./ClosetPage.scss";
@@ -62,7 +62,7 @@ const ClosetPage = ({ user }) => {
         return (
             <div className="unauthorized">
                 <h1>Oops!</h1>
-                <p>Looks like you're not friends with this user. Add friends on ClothesLine to start swapping!</p>
+                <p>Looks like you're not friends with this user. Head back to the <Link to="/explore">Explore Page</Link> to browse friends' closets.</p>
             </div>
         )
     }

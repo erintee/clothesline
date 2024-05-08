@@ -3,7 +3,7 @@ import { ReactComponent as Close } from '../../assets/icons/close-24px.svg'
 import './Modal.scss';
 
 
-export default function Modal ({ isOpen, onClose, children, handleSubmit, buttonText }) {
+export default function Modal ({ isOpen, onClose, children }) {
     const modalRef = useRef(null);
 
     const [ modalOpen, setModalOpen ] = useState(isOpen);

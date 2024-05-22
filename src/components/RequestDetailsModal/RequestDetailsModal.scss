@@ -9,7 +9,7 @@
         flex-direction: column;
         justify-content: flex-start;
         padding: 2rem 0.5rem 1rem;
-        overflow-y: scroll;
+        overflow: hidden;
 
         @include desktop {
             justify-content: center;
@@ -22,14 +22,24 @@
     &__item-container {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
+        height: 35%;
+        border-bottom: 0.5px solid $grey;
+        padding-bottom: 1rem;
+
+        @include tablet {
+            flex-direction: row;
+            align-items: center;
+        }
         
         @include desktop {
             width: 45%;
             height: 100%;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            border-bottom: unset;
+            border-right: 0.5px solid $grey;
+            padding-bottom: 0;
         }
     }
     
@@ -37,7 +47,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 200px;
+        height: 50%;
+
+        @include tablet {
+            height: 100%;
+        }
+
+        @include desktop {
+            height: 50%;
+        }
     }
     
     &__image {
@@ -45,9 +63,10 @@
         max-width: 100%;
         max-height: 100%;
     }
-
+    
     &__header {
-        @include m-header;
+        @include m-subheader;
+        font-weight: 700;
         color: black;
         display: flex;
         flex-direction: column;
@@ -56,56 +75,27 @@
         
         @include tablet {
             @include td-subheader;
+            margin-top: 0;
+            margin-left: 1rem;
         }
     
         @include desktop {
             text-align: left;
-        }
-    }
-
-    &__size {
-        @include m-body;
-        text-align: center;
-        margin-top: 0.5rem;
-
-        @include tablet {
-            @include td-body;
-            
+            margin-left: 0;
+            margin-top: 1rem;
         }
     }
     
-    &__message-container {
+    &__text-container {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        height: 100%;
-        padding-top: 2rem;
+        height: 65%;
 
         @include desktop {
             width: 50%;
-            height: 346px;
+            height: 100%;
             justify-content: flex-start;
-        }
-    }
-    
-    &__label {
-        display: block;
-        @include m-label;
-
-        @include tablet {
-            @include td-label;
-        }
-    }
-
-    &__message {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 1rem 0;
-        border-radius: 4px;
-        @include m-body;
-        
-        @include tablet {
-            @include td-body;
+            padding-top: 0;
         }
     }
 
@@ -140,5 +130,88 @@
 
     &__button {
         flex-shrink: 0;
+    }
+}
+
+.messages {
+    width: 100%;
+    height: 100%;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 78px);
+
+    &__header {
+        display: block;
+    }
+    
+    &__container {
+        width: 100%;
+        display: flex;
+        overflow: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &__item {
+        display: block;
+        width: fit-content;
+        max-width: 55%;
+
+        &--user {
+            align-self: flex-end;
+            text-align: right;
+        }
+    }
+    
+    &__username {
+        display: block;
+        @include m-label;
+    }
+    
+    &__message-body {
+        background-color: $grey;
+        color: black;
+        padding: 0.5rem;
+        border-radius: 4px;
+    
+        &--user {
+            background-color: $teal;
+            color: white;
+            text-align: left;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: -0.5rem;
+        border: 0.5px solid $teal;
+        border-radius: 4px;
+        height: 2rem;
+    }
+
+    &__input {
+        all: unset;
+        margin-bottom: 0.15rem;
+        padding: 0 0.5rem;
+        flex-grow: 1;
+
+        &::placeholder {
+            @include m-body;
+        }
+    }
+
+    &__icon-container {
+        display: inline-block;
+        background-color: $teal;
+        width: 2rem;
+        padding: 0.25rem;
+    }
+    
+    &__send-icon {
+        width: 100%;
     }
 }

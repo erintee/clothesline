@@ -13,9 +13,10 @@
 
     
     @include tablet {
-        margin: 10vh auto 30vh;
-        width: 60vw;
-        height: 55vh;
+        margin: 10vh auto 20vh;
+        width: unset;
+        max-width: 50vw;
+        height: unset;
     }
     
     &::backdrop {

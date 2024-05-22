@@ -13,14 +13,28 @@ const Registration = ({ setIsRegistered }) => {
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ error, setError ] = useState(false);
+    const [ emailError, setEmailError ] = useState(false);
     const [ existingUser, setExistingUser ] = useState(false);
     
+
+    const isEmailValid = (email) => {
+        console.log("testing email")
+        return /\S+@\S+\.\S+/.test(email)
+    }
 
     const isFormValid = () => {
         if ( !firstName || !lastName || !email || !password || !confirmPassword ) {
             setError(true);
             return false;
         }
+
+        const validEmail = isEmailValid(email);
+
+        if (!validEmail) {
+            setEmailError(true);
+            return false;
+        }
+
         return true;
     }
 
@@ -86,6 +100,12 @@ const Registration = ({ setIsRegistered }) => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormError errorState={error} field={email}>Please enter a valid email address</FormError>
+                    {emailError && (
+                        <span className='input-error'>
+                            <img className='input-error__icon' src={ErrorIcon} alt='ErrorIcon'></img>
+                            <p className='input-error__message'>Invalid email address</p>
+                        </span>
+                    )}
                     {existingUser && (
                         <span className='input-error'>
                             <img className='input-error__icon' src={ErrorIcon} alt='ErrorIcon'></img>

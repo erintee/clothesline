@@ -48,20 +48,22 @@ npm start
 
 1. Ensure to have Nodejs installed.
 
-2. All dependencies will be included in the package.json file. To get started, run:
+2. Server can be downloaded from clothesline-server repo.
+
+3. All dependencies will be included in the package.json file. To get started, run:
 ```
 npm install
 ```
 
-3. Set up a new .env file and copy variables from .env.sample
+4. Set up a new .env file and copy variables from .env.sample file.
 
-4. Set up a local database in accordance with the DB_NAME in your .env file, then run:
+5. Set up a local database in accordance with the DB_NAME in your .env file, then run:
 ```
 npx knex migrate:latest
 npx knex seed:run
 ```
 
-5. To start up the server, run:
+6. To start up the server, run:
 ```
 node server.js
 ```
@@ -383,5 +385,4 @@ Response:
 ## Next steps
 - Implement searching for and adding friends
 - Implement editing and deleting items from closet
-- Add date field when sending a request
 - Forgot password functionality

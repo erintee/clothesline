@@ -6,7 +6,7 @@ import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import FormError from '../../components/FormError/FormError';
 import ErrorIcon from '../../assets/icons/error-24px.svg';
 
-const Registration = ({ setIsRegistered }) => {
+const Registration = ({ setIsLoggedIn }) => {
     const [ firstName, setFirstName ] = useState("");
     const [ lastName, setLastName ] = useState("");
     const [ email, setEmail ] = useState("");
@@ -18,7 +18,6 @@ const Registration = ({ setIsRegistered }) => {
     
 
     const isEmailValid = (email) => {
-        console.log("testing email")
         return /\S+@\S+\.\S+/.test(email)
     }
 
@@ -29,7 +28,6 @@ const Registration = ({ setIsRegistered }) => {
         }
 
         const validEmail = isEmailValid(email);
-
         if (!validEmail) {
             setEmailError(true);
             return false;
@@ -55,10 +53,9 @@ const Registration = ({ setIsRegistered }) => {
                 
                 const response = await axios.post(`${BASE_URL}/auth/register`, newUser);
 
-                
-                if(response.data.success) {
-                    console.log("Successfully signed up");
-                    setIsRegistered(true);
+                if(response.status === 201) {
+                    localStorage.setItem("authToken", response.data.token)
+                    setIsLoggedIn(true);
                 }
                 
             } catch (error) {

@@ -24,7 +24,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
             {isRegistered ? (
                 <Login setIsLoggedIn={setIsLoggedIn} />
             ) : (
-                <Registration setIsRegistered={setIsRegistered} />
+                <Registration setIsLoggedIn={setIsLoggedIn} />
             )}
             </section>
         </article>

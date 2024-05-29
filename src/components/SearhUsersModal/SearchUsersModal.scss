@@ -3,14 +3,20 @@
 
 .search-modal {
     padding: 2rem 0.5rem 1rem;
+    height: 100%;
 
     &__header {
         @include m-header;
     }
 
+    &__results {
+        margin-bottom: 1rem;
+    }
+
     &__results-placeholder {
         color: $grey;
         font-style: italic;
+        @include m-body;
     }
 
     &__results-item {
@@ -19,19 +25,21 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 1rem;
-        font-weight: 700;
+        @include m-body;
 
         &:hover {
             color: $teal;
         }
     }
 
-    &__add-button {
+    &__button {
         border: 1px solid $teal;
         background-color: $teal;
         color: white;
         padding: 0.15rem 0.5rem;
-        @include m-label;
+        height: 1.25rem;
+        text-transform: uppercase;
+        font-size: 0.65rem;
         font-weight: 400;
         cursor: pointer;
 
@@ -54,6 +62,7 @@
         margin-bottom: 0.15rem;
         padding: 0 0.5rem;
         flex-grow: 1;
+        @include m-body;
         
         &::placeholder {
             @include m-body;
@@ -67,5 +76,42 @@
 
     &__icon {
         height: 100%;
+    }
+}
+
+.friends {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+
+    &__section {
+        margin-bottom: 1rem;
+    }
+
+    &__header {
+        @include m-subheader;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0.25rem 0;
+    }
+
+    &__user {
+        @include m-body;
+        cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+
+    &__placeholder {
+        @include m-body;
+        font-style: italic;
+        color: $grey;
     }
 }

@@ -156,7 +156,7 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
                     : <></>
                     }
                 </div>
-                <div className="friends-container">
+                <div className="friends">
                     <div className="friends__section">
                         <h2 className="friends__header">Incoming Requests</h2>
                         {(incoming.length > 0) ?
@@ -173,7 +173,7 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
                                     </div>)
                                 })}
                             </div>
-                            : <p>No incoming friendship requests</p>
+                            : <p className="friends__placeholder">No incoming friendship requests</p>
                         }
                     </div>
                     <div className="friends__section">
@@ -186,12 +186,12 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
                                         key={request.id}
                                         className="friends__item"
                                     >
-                                        <p className="friens__user">{request.first_name}</p>
-                                        <div className="friends__button" onClick={() => handleDelete(request.id, "Cancel request?")}>Cancel</div>
+                                        <p className="friends__user">{request.first_name}</p>
+                                        <div className="search-modal__button" onClick={() => handleDelete(request.id, "Cancel request?")}>Cancel</div>
                                     </div>)
                                 })}
                             </div>
-                            : <p>No outgoing friendship requests</p>
+                            : <p className="friends__placeholder">No outgoing friendship requests</p>
                         }
                     </div>
                     <div className="friends__section">
@@ -205,11 +205,11 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
                                         className="friends__item"
                                     >
                                         <p className="friends__user" onClick={() => handleNavigate(friendship.user_id)}>{friendship.first_name}</p>
-                                        <div className="friends__button" onClick={() => handleDelete(friendship.id, "Delete friend?")}>Delete</div>
+                                        <div className="search-modal__button" onClick={() => handleDelete(friendship.id, "Delete friend?")}>Delete</div>
                                     </div>)
                                 })}
                             </div>
-                            : <p>Add friends to see them here</p>
+                            : <p className="friends__placeholder">Add friends to see them here</p>
                         }
                     </div>
                 </div>

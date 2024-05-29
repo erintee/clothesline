@@ -129,7 +129,7 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
     }
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} email={email} setEmail={setEmail}>
             <div className="search-modal">
                 <h1 className="search-modal__header">Find friends on ClothesLine</h1>
                 <form className="search-form" onSubmit={handleSubmit}>

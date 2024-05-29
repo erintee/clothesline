@@ -8,43 +8,54 @@
     position: relative;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     
-    @include tablet {
-        height: 80px;
-    }
-    
     &__content {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 1rem;
         @include desk-width;
+    }
 
-        @include tablet {
-            padding-top: 0.85rem;
+    &__logo-container {
+        cursor: pointer;
+        
+        &:hover {
+            color: $teal;
         }
     }
 
+    &__logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+
     &__logo {
-        cursor: pointer;
         @include m-header;
         padding-top: 0.35rem;
+    }
 
-        @include tablet {
-            @include td-header;
-        }
+    &__user-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 1rem;
+    }
+
+    &__add-friends-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 1.5rem;
+        transition: 0.25s;
+        cursor: pointer;
 
         &:hover {
-            color: $teal;
+            transform: translateY(-0.25rem)
         }
     }
 
     &__name {
         @include m-subheader;
         cursor: pointer;
-
-        @include tablet {
-            @include td-subheader;
-        }
 
         &:hover {
             color: $teal;
@@ -54,10 +65,6 @@
     &__logout {
         @include m-body;
         cursor: pointer;
-
-        @include tablet {
-            @include td-body;
-        }
 
         &:hover {
             color: $teal;

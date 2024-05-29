@@ -1,0 +1,71 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.search-modal {
+    padding: 2rem 0.5rem 1rem;
+
+    &__header {
+        @include m-header;
+    }
+
+    &__results-placeholder {
+        color: $grey;
+        font-style: italic;
+    }
+
+    &__results-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        font-weight: 700;
+
+        &:hover {
+            color: $teal;
+        }
+    }
+
+    &__add-button {
+        border: 1px solid $teal;
+        background-color: $teal;
+        color: white;
+        padding: 0.15rem 0.5rem;
+        @include m-label;
+        font-weight: 400;
+        cursor: pointer;
+
+        &:hover {
+            background-color: white;
+            color: teal;
+        }
+    }
+}
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+    border: 0.5px solid $teal;
+    height: 2rem;
+    
+    &__input {
+        all: unset;
+        margin-bottom: 0.15rem;
+        padding: 0 0.5rem;
+        flex-grow: 1;
+        
+        &::placeholder {
+            @include m-body;
+        }
+    }
+
+    &__icon-container {
+        height: 2rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    &__icon {
+        height: 100%;
+    }
+}

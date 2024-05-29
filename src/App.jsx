@@ -9,10 +9,12 @@ import ExplorePage from './pages/ExplorePage/ExplorePage';
 import ClosetPage from './pages/ClosetPage/ClosetPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import SearchUsersModal from './components/SearhUsersModal/SearchUsersModal';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(!!localStorage.getItem("authToken"));
   const [ user, setUser ] = useState(null);
+  const [ searchModalOpen, setSearchModalOpen ] = useState(false);
 
   useEffect(() => {
     if(isLoggedIn) {
@@ -37,6 +39,13 @@ function App() {
     return <>Loading</>
   }
 
+  const handleOpenSearchModal = (event) => {
+    setSearchModalOpen(true);
+  };
+
+  const handleCloseSearchModal = () => {
+      setSearchModalOpen(false);
+  };
   return (
     <div className="App">
       <BrowserRouter>
@@ -46,6 +55,11 @@ function App() {
           setUser={setUser}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
+          handleOpenSearchModal={handleOpenSearchModal}
+        />
+        <SearchUsersModal
+          isOpen={searchModalOpen}
+          onClose={handleCloseSearchModal}
         />
         
         <Routes>

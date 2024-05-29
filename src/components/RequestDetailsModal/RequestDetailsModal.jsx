@@ -51,13 +51,13 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
           } catch (error) {
             console.error('Error fetching message history:', error)
         }
-    }, )
+    }, [requestId])
 
     useEffect(() => {
       if (isOpen && requestId) {
         fetchRequestMessages();
       }
-    }, [requestId, isOpen]);
+    }, [requestId, isOpen, fetchRequestMessages]);
 
     // Form submit
     const handleSubmit = async (e) => {
@@ -123,7 +123,6 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
                       <img className='request-modal__image' src={`http://localhost:8080/uploads/${item.image}`} alt={item.title} />
                     </div>
                     <h2 className='request-modal__header'>{item.title}</h2>
-                    {/* <p className="request-modal__size">Size {item.size}</p> */}
                 </section>
                 <section className="request-modal__text-container">
                     <section className="messages">

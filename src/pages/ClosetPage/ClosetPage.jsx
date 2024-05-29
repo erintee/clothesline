@@ -41,7 +41,14 @@ const ClosetPage = ({ user }) => {
 
     useEffect (() => {
         const fetchUserName = async () => {
-            const response = await axios.get(`${BASE_URL}/users/${userId}`);
+            const token = localStorage.getItem("authToken");
+            const response = await axios.get(`${BASE_URL}/users/${userId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             const user = response.data.first_name;
             setUserName(user);
         }

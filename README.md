@@ -46,9 +46,9 @@ npm start
 
 ### Server:
 
-1. Ensure to have Nodejs installed.
+1. Ensure to have Node.js installed.
 
-2. Server can be downloaded from clothesline-server repo.
+2. Download the [server](http://github.com/erintee/clothesline-server).
 
 3. All dependencies will be included in the package.json file. To get started, run:
 ```
@@ -96,14 +96,14 @@ node server.js
     - View uploaded items
     - Upload new items
 - Explore page:
-    - Browse all friends' items with the option of filtering for specific styles or sizes
-    - Click individual items to send a request to friends
+    - Browse all friends' items on one page with the option of filtering for specific styles or sizes
+    - Click individual items to see details and send a borrow request
 - Closet pages:
-    - Browse the items that one friend has uploaded to their closet
+    - Browse a friend's items
 
 ### Endpoints
 
-**ITEM Routes**
+#### **ITEM Routes** ####
 
 **GET /items**
 - Get a list of friends' items
@@ -118,18 +118,18 @@ Response:
 ```
 [
     {
-        "id": 8,
-        "title": "Long wool dresscoat",
-        "size": "L/10/30",
-        "image": "wool-coat.png",
-        "first_name": "Evelyn"
+      "id": 8,
+      "title": "Long wool dresscoat",
+      "size": "L/10/30",
+      "image": "wool-coat.png",
+      "first_name": "Evelyn"
     },
     {
-        "id": 9,
-        "title": "Pleated skirt",
-        "size": "XS/2/26",
-        "image": "pleat-skirt.png",
-        "first_name": "Zhenyi"
+      "id": 9,
+      "title": "Pleated skirt",
+      "size": "XS/2/26",
+      "image": "pleat-skirt.png",
+      "first_name": "Zhenyi"
     },
     ...
 ]
@@ -149,13 +149,13 @@ Parameters:
 Response:
 ```
 {
-    "id": 1,
-    "user_id": 25,
-    "title": "Red rain jacket",
-    "type": "jacket",
-    "colour": "red",
-    "size": "M/8/28",
-    "image": "image.jpg",
+  "id": 1,
+  "user_id": 25,
+  "title": "Red rain jacket",
+  "type": "jacket",
+  "colour": "red",
+  "size": "M/8/28",
+  "image": "image.jpg",
 }
 ```
 
@@ -169,18 +169,19 @@ Parameters:
 Response:
 ```
 {
-    "id": 8,
-    "title": "Long wool dresscoat",
-    "type": "outerwear",
-    "colour": "brown",
-    "size": "L/10/30",
-    "image": "wool-coat.png",
-    "user_id": 3,
-    "first_name": "Evelyn"
+  "id": 8,
+  "title": "Long wool dresscoat",
+  "type": "outerwear",
+  "colour": "brown",
+  "size": "L/10/30",
+  "image": "wool-coat.png",
+  "user_id": 3,
+  "first_name": "Evelyn"
 }
 ```
 ---
-**USER Routes**
+
+#### **USER Routes** ####
 
 **GET /users/active**
 - Get active user after login
@@ -191,10 +192,10 @@ Parameters:
 Response:
 ```
 {
-    "firstName": "Jane",
-    "lastName": "Sample",
-    "email": "jane.sample@email.com",
-    "id": 1
+  "firstName": "Jane",
+  "lastName": "Sample",
+  "email": "jane.sample@email.com",
+  "id": 1
 }
 ```
 
@@ -208,8 +209,8 @@ Parameters:
 Response:
 ```
 {
-    "first_name": "Grace",
-    "last_name": "Hopper"
+  "first_name": "Grace",
+  "last_name": "Hopper"
 }
 ```
 
@@ -219,7 +220,7 @@ Response:
 
 Parameters:
 - user id
-- JWT token
+- JWT
 
 Response:
 ```
@@ -243,8 +244,25 @@ Response:
     ...
 ]
 ```
+
+**GET /search/:email**
+- Search users by email address
+
+Parameters:
+- JWT
+
+Response:
+```
+{
+  "first_name": "Jane",
+  "email": "jane.sample@email.com",
+  "id": 1
+}
+```
+
 ---
-**REQUEST Routes**
+
+#### **REQUEST Routes** ####
 
 **GET /requests**
 - Get all requests associated with active user
@@ -256,24 +274,35 @@ Response:
 ```
 {
     "incoming": [
-    {
+      {
         "id": 4,
         "user1_id": 3,
+        "request_start": "2024-05-25T07:00:00.000Z",
         "title": "Parka",
         "image": "parka.jpg",
         "first_name": "Evelyn"
-    }
+      }
     ],
     "outgoing": [
-    {
-        "id": 1,
+      {
+        "id": 13,
         "user1_id": 1,
+        "request_start": "2024-05-31T07:00:00.000Z",
         "title": "Winter boots",
         "image": "boots.jpg",
         "first_name": "Misty"
-    },
+      },
     ],
-    "history": ...
+    "active": [],
+    "history": [
+      {
+        "id": 3,
+        "user1_id": 3,
+        "title": "Black pumps",
+        "image": "black-shoes.png",
+        "first_name": "Evelyn"
+      },
+    ]
 }
 ```
 
@@ -286,15 +315,56 @@ Parameters:
 Response:
 ```
 {
+  "id": 13,
+  "item_id": 10,
+  "user1_id": 1,
+  "request_start": "2024-05-31T07:00:00.000Z",
+  "request_end": "2024-06-02T07:00:00.000Z",
+  "status": "pending",
+  "title": "DW Watch",
+  "size": "N/A",
+  "image": "dw-watch.png",
+  "first_name": "Jane"
+}
+```
+
+**POST /requests/:itemId**
+- Send a request
+
+Parameters:
+- JWT
+- user1, user2, request_start, request_end, message
+
+```
+{
+  "id": 14,
+  "user1_id": 1,
+  "user2_id": 4,
+  "request_start": "2024-05-31T07:00:00.000Z",
+  "request_end": "2024-06-02T07:00:00.000Z",
+  "status": "pending",
+  "message": "Can I please borrow this next week?"
+}
+```
+
+**PUT /requests/:requestId**
+- Accept or decline a pending incoming request
+
+Parameters:
+- JWT
+- status
+
+Response:
+```
+{
   "id": 3,
-  "item_id": 2,
   "user1_id": 3,
-  "message": "Hi! Can I borrow these for Sam's wedding?",
+  "user2_id": 1,
+  "item_id": 2,
+  "request_start": "2024-05-25T07:00:00.000Z",
+  "request_end": "2024-05-26T07:00:00.000Z",
   "status": "accepted",
-  "title": "Black pumps",
-  "size": "9",
-  "image": "black-shoes.png",
-  "first_name": "Evelyn"
+  "created_at": "2024-05-15T19:05:15.000Z"
 }
 ```
 
@@ -304,8 +374,56 @@ Response:
 Parameters:
 - JWT
 
-**PUT /requests/:requestId**
-- Accept or decline a pending incoming request
+No response given
+
+**GET /requests/:requestId/messages**
+- Get all messages for an item request
+
+Parameters:
+- JWT
+
+Response:
+```
+[
+  {
+    "user_id": 3,
+    "message": "Hi! Can I borrow these for Sam's wedding?",
+    "sent_at": "2024-05-15T19:05:15.000Z",
+    "first_name": "Evelyn"
+  },
+  {
+    "user_id": 1,
+    "message": "No problem!",
+    "sent_at": "2024-05-16T19:03:44.000Z",
+    "first_name": "Jane"
+  }
+]
+```
+
+**POST /requests/:requestId/messages**
+- Send a message in relation to an item request
+
+Parameters:
+- JWT
+- message, userId
+
+Response:
+```
+{
+  "id": 25,
+  "request_id": 3,
+  "user_id": 1,
+  "message": "No problem!",
+  "sent_at": "2024-05-16T19:03:44.000Z"
+}
+```
+
+---
+
+**FRIENDSHIP Routes**
+
+**GET /friendships**
+- Get a list of all friends, including pending requests
 
 Parameters:
 - JWT
@@ -313,35 +431,73 @@ Parameters:
 Response:
 ```
 {
-  "id": 3,
-  "user1_id": 3,
-  "user2_id": 1,
-  "item_id": 2,
-  "message": "Hi! Can I borrow these for Sam's wedding?",
-  "status": "declined",
-  "date": "1706809948000"
+  "outgoing": [
+    {
+      "id": 17,
+      "user_id": 2,
+      "first_name": "Misty"
+    }
+  ],
+  "incoming": [],
+  "friends": [
+    {
+      "id": 3,
+      "user_id": 4,
+      "first_name": "Zhenyi"
+    },
+    {
+      "id": 4,
+      "user_id": 5,
+      "first_name": "Grace"
+    }
+  ]
 }
 ```
 
-**POST /requests/:itemId**
-- Send a request
+**POST /friendships**
+- Send a friendship request
+
+Parameters:
+- JWT
+- userId
+
+Response:
+```
+{
+  "id": 19,
+  "user1_id": 1,
+  "user2_id": 3,
+  "status": "requested"
+}
+```
+
+**PUT /friendships/:friendshipId**
+- Accept or decline a friendship request
+
+Parameters:
+- JWT
+- status
+
+Response:
+```
+{
+  "id": 17,
+  "user1_id": 1,
+  "user2_id": 2,
+  "status": "accepted"
+}
+```
+
+**DELETE /friendships/:friendshipId**
+- Delete a friendship record
 
 Parameters:
 - JWT
 
-```
-{
-  "id": 7,
-  "user1_id": 1,
-  "user2_id": 2,
-  "item_id": 4,
-  "message": "Can I please borrow this next week?",
-  "status": "pending",
-  "date": "1715059025542"
-}
-```
+No response given
 
 ---
+
 **AUTH Routes**
 
 **POST /auth/register**
@@ -363,7 +519,7 @@ Response:
 
 **POST /auth/login**
 
-- Login a user
+- Log in a user
 
 Parameters:
 - email, password
@@ -383,6 +539,5 @@ Response:
 
 
 ## Next steps
-- Implement searching for and adding friends
 - Implement editing and deleting items from closet
 - Forgot password functionality

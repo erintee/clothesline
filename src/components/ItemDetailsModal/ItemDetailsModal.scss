@@ -100,10 +100,15 @@
         }
     }
     
+    &__focus-override {
+        all: unset;
+        width: 0;
+        height: 0;
+    }
+
     &__label {
         display: block;
         @include m-label;
-        margin-top: 1rem;
         margin-bottom: 0.5rem;
 
         @include desktop {
@@ -113,13 +118,16 @@
 
     &__date-container {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        margin-bottom: 0.25rem;
     }
 
     &__date {
-        margin-bottom: 0.5rem;
+        padding: 0.25rem 0;
+        @include m-label;
+        color: $teal;
     }
-
+    
     &__date-input {
         margin-left: 0.5rem;
     }

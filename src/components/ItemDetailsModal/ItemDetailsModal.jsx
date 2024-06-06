@@ -130,6 +130,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
           </section>
           <section className="item-modal__request-container">
             <form onSubmit={handleSubmit} className="item-modal__form">
+              <input className="item-modal__focus-override" type="text"/>
               <label className="item-modal__label">Let {item.first_name} know you'd like to borrow this:</label>
               <section className="item-modal__date-container">
                 <label className="item-modal__date">

@@ -38,7 +38,7 @@ export default function Modal ({ isOpen, onClose, children, clearFields }) {
 
     return (
         <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal">
-            <div className='modal__content'>
+            <div autoFocus className='modal__content'>
                 <div className='modal__toolbar'>
                   <span className='modal__close-icon'>
                     <Close onClick={handleCloseModal}/>

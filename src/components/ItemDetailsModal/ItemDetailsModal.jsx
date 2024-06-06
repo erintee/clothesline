@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 import './ItemDetailsModal.scss';
+import "react-datepicker/dist/react-datepicker.css";
 import Modal from '../Modal/Modal';
 import { BASE_URL } from '../../utils/utils';
 import ButtonPrimary from "../ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../ButtonSecondary/ButtonSecondary";
+import ErrorIcon from "../../assets/icons/error-24px.svg";
 
 export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
 
   const navigate = useNavigate();
   const [ item, setItem ] = useState("");
   const [ message, setMessage ] = useState("");
+  const [ startDate, setStartDate ] = useState(new Date());
+  const [ endDate, setEndDate ] = useState(new Date());
+  const [ endDateError, setEndDateError ] = useState(false);
+  const [ startDateError, setStartDateError ] = useState(false);
 
+  // Load item details
   useEffect(() => {
     const fetchItem = async () => {
       try {
@@ -29,6 +37,38 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
 
   }, [isOpen, itemId]);
 
+  // Handle date selection and check validity on change
+  const handleChangeStart = (date) => {
+    const current = new Date();
+    
+    if (date < current) {
+      setStartDateError(true);
+      return;
+    }
+
+    setStartDateError(false);
+    setStartDate(date);
+  }
+
+  const handleChangeEnd = (date) => {
+    if (date < startDate) {
+      setEndDateError(true);
+      return;
+    }
+
+    setEndDateError(false);
+    setEndDate(date);
+  }
+
+  // Check if period of request is valid
+  const isValidDate = () => {
+    if(startDateError || endDateError) {
+      return false;
+    }
+    return true;
+  }
+
+  // Send request to server
   const sendRequest = async (id) => {     
     try {
       const token = localStorage.getItem("authToken");
@@ -36,6 +76,8 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
       const body = {
         "user1": user.id,
         "user2": item.user_id,
+        "requestStart": startDate,
+        "requestEnd": endDate,
         "message": message
       }
 
@@ -50,13 +92,29 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
     }
   }
   
+  // Handle request submission
   const handleSubmit = (e) => {
+    const validDate = isValidDate();    
+    if (!validDate) {
+      return;
+    }
+
     sendRequest(itemId);
+    setStartDate(new Date());
+    setEndDate(new Date());
+    setMessage("");
     onClose();
   }
 
+  // Clear fields on manual modal close
+  const handleClearFields = () => {
+    setStartDate(new Date());
+    setEndDate(new Date());
+    setMessage("");
+  }
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} clearFields={handleClearFields}>
         <>
         <section className='item-modal__content-container'>
           <section className='item-modal__item-container'>
@@ -73,6 +131,42 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
           <section className="item-modal__request-container">
             <form onSubmit={handleSubmit} className="item-modal__form">
               <label className="item-modal__label">Let {item.first_name} know you'd like to borrow this:</label>
+              <section className="item-modal__date-container">
+                <label className="item-modal__date">
+                  From:
+                  <DatePicker
+                    className="item-modal__date-input"
+                    type="text"
+                    size="sm"
+                    placeholder="Start date"
+                    selected={startDate}
+                    onSelect={(date) => handleChangeStart(date)}
+                  />
+                  {startDateError && (
+                        <span className='input-error'>
+                            <img className='input-error__icon' src={ErrorIcon} alt='ErrorIcon'></img>
+                            <p className='input-error__message'>Invalid start date</p>
+                        </span>
+                  )}
+                </label>
+                <label className="item-modal__date">
+                  Until:
+                  <DatePicker
+                    className="item-modal__date-input"
+                    type="text"
+                    size="sm"
+                    placeholder="End date"
+                    selected={endDate}
+                    onChange={(date) => handleChangeEnd(date)}
+                  />
+                  {endDateError && (
+                        <span className='input-error'>
+                            <img className='input-error__icon' src={ErrorIcon} alt='ErrorIcon'></img>
+                            <p className='input-error__message'>End date must be after start date</p>
+                        </span>
+                  )}
+                </label>
+              </section>
               <textarea
                 className="item-modal__input"
                 name="message" 

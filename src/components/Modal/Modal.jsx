@@ -3,19 +3,15 @@ import { ReactComponent as Close } from '../../assets/icons/close-24px.svg'
 import './Modal.scss';
 
 
-export default function Modal ({ isOpen, onClose, children, email, setEmail }) {
+export default function Modal ({ isOpen, onClose, children, clearFields }) {
     const modalRef = useRef(null);
 
     const [ modalOpen, setModalOpen ] = useState(isOpen);
 
     const handleCloseModal = () => {
-        if(onClose) {
-            onClose();
-        }
-        if(email) {
-          setEmail("");
-        }
-        setModalOpen(false)
+        onClose();
+        clearFields();
+        setModalOpen(false);
     }
 
     const handleKeyDown = (event) => {

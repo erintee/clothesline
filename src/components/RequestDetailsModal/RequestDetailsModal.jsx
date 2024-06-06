@@ -7,7 +7,7 @@ import ButtonPrimary from "../ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../ButtonSecondary/ButtonSecondary";
 import sendIcon from '../../assets/icons/send-icon64.png';
 
-export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) {
+export default function RequestDetailsModal ({ isOpen, onClose, requestId, user }) {
 
     const [ item, setItem ] = useState("");
     const [ messages, setMessages ] = useState([]);
@@ -26,8 +26,16 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
             try {
                 const response = await axios.get(`${BASE_URL}/requests/${requestId}`, {
                     headers: {Authorization: `Bearer ${token}`}
-                });                
-                setItem(response.data)
+                });
+                const item = response.data;
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  };
+                item.request_start = new Date(item.request_start).toLocaleDateString(undefined, options);
+                item.request_end = new Date(item.request_end).toLocaleDateString(undefined, options);
+                setItem(item)
 
               } catch (error) {
                 console.error('Error fetching request details:', error)
@@ -65,7 +73,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
 
         if(newMessage) {
             const body = {
-                "user_id": user.id,
+                "userId": user.id,
                 "message": newMessage,
             }
 
@@ -114,15 +122,24 @@ export default function ItemDetailsModal ({ isOpen, onClose, requestId, user }) 
         }
     }
 
+    // Clear fields on modal close
+    const handleClearFields = () => {
+        setNewMessage("");
+    }
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} clearFields={handleClearFields}>
             <>
             <section className='request-modal__content-container'>
                 <section className='request-modal__item-container'>
                     <div className='request-modal__image-container'>
                       <img className='request-modal__image' src={`http://localhost:8080/uploads/${item.image}`} alt={item.title} />
                     </div>
-                    <h2 className='request-modal__header'>{item.title}</h2>
+                    <div className="request-modal__details-container">
+                        <h2 className='request-modal__header'>{item.title}</h2>
+                        <p className="request-modal__details">From: {item.request_start}</p>
+                        <p className="request-modal__details">To: {item.request_end}</p>
+                    </div>
                 </section>
                 <section className="request-modal__text-container">
                     <section className="messages">

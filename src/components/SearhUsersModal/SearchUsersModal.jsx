@@ -121,6 +121,7 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
         }
     }
 
+    // Navigate to friend's closet when name clicked
     const handleNavigate = (id) => {
         setEmail("");
         setResults("");
@@ -128,8 +129,13 @@ const SearchUsersModal = ({ isOpen, onClose }) => {
         navigate(`/closets/${id}`);
     }
 
+    // Clear fields on manual modal close
+    const handleClearFields = () => {
+        setEmail("");
+    }
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose} email={email} setEmail={setEmail}>
+        <Modal isOpen={isOpen} onClose={onClose} clearFields={handleClearFields}>
             <div className="search-modal">
                 <h1 className="search-modal__header">Find friends on ClothesLine</h1>
                 <form className="search-form" onSubmit={handleSubmit}>

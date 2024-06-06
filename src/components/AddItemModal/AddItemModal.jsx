@@ -16,6 +16,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
     const [ size, setSize ] = useState("");
     const [ error, setError ] = useState(false);
 
+    // Check form has no empty fields
     const isFormValid = () => {
         if (!title || !type || !colour || !size || !filename) {
             setError(true);
@@ -24,14 +25,21 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         return true;
     };
     
-    const handleClear = (e) => {
-        e.preventDefault();
+    // Handle clear on manual modal close
+    const handleClearFields = () => {
         setTitle("");
         setType("");
         setColour("");
         setSize("");
     }
 
+    // Handle manual clear on button click
+    const handleClear = (e) => {
+        e.preventDefault();
+        handleClearFields();
+    }
+
+    // Submit form with post request
     const handleSubmit = async (e) => {
         e.preventDefault();
         const valid = isFormValid();
@@ -61,7 +69,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
     }
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} clearFields={handleClearFields}>
         <form className="form" encType="multipart/form-data" onSubmit={handleSubmit}>
             <h1 className="form__title">Add an item to your closet</h1>
             <section className="form__content">

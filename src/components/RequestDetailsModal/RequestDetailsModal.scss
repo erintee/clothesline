@@ -64,28 +64,38 @@
         max-height: 100%;
     }
     
+    &__details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        @include tablet {
+            align-items: flex-start;
+        }
+    }
+
     &__header {
         @include m-subheader;
         font-weight: 700;
         color: black;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
         margin-top: 1rem;
         
         @include tablet {
             @include td-subheader;
-            margin-top: 0;
-            margin-left: 1rem;
+            margin: 0 0 0.5rem;
         }
     
         @include desktop {
             text-align: left;
-            margin-left: 0;
             margin-top: 1rem;
         }
     }
-    
+
+    &__details {
+        @include m-body;
+        color: grey;
+    }
+
     &__text-container {
         display: flex;
         flex-direction: column;

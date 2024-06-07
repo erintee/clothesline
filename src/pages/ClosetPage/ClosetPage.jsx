@@ -6,12 +6,15 @@ import "./ClosetPage.scss";
 import ItemList from "../../components/ItemList/ItemList";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 import AddItemModal from "../../components/AddItemModal/AddItemModal";
+import ItemDetailsModal from "../../components/ItemDetailsModal/ItemDetailsModal";
 import hanger from "../../assets/icons/clothes-hanger.png";
 
 const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
     const [ userName, setUserName ] = useState("");
     const [ addModalOpen, setAddModalOpen ] = useState(false);
+    const [ itemModalOpen, setItemModalOpen ] = useState(false);
+    const [ selectedItem, setSelectedItem ] = useState("");
     const [ authorized, setAuthorized ] = useState(false);
 
     const { userId } = useParams();
@@ -65,6 +68,16 @@ const ClosetPage = ({ user }) => {
         setAddModalOpen(false);
     };
 
+    const handleOpenItemModal = (event) => {
+        const id = event.currentTarget.id;
+        setSelectedItem(id);
+        setItemModalOpen(true);
+    };
+
+    const handleCloseItemModal = () => {
+        setItemModalOpen(false);
+    };
+
     if (!authorized) {
         return (
             <div className="unauthorized">
@@ -76,12 +89,18 @@ const ClosetPage = ({ user }) => {
 
     return (
         <div className="closet">
-            {Number(userId) === user.id && 
+            {Number(userId) === user.id ? 
                 <AddItemModal
                     isOpen={addModalOpen}
                     onClose={handleCloseAddModal}
                     user={user}
-                ></AddItemModal>
+                /> :
+                <ItemDetailsModal
+                    isOpen={itemModalOpen}
+                    onClose={handleCloseItemModal}
+                    itemId={selectedItem}
+                    user={user}
+                />
             }
             <div className="closet__header-container">
                 <section className="closet__header">
@@ -110,6 +129,7 @@ const ClosetPage = ({ user }) => {
                 </div> :
                 <ItemList
                     data={items}
+                    handleOpenItemModal={handleOpenItemModal}
                 />
             }
         </div>

@@ -51,6 +51,7 @@ function App() {
       <BrowserRouter>
 
         <Header
+          className="header"
           user={user}
           setUser={setUser}
           isLoggedIn={isLoggedIn}

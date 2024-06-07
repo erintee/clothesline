@@ -1,6 +1,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
+
 .header {
     width: 100%;
     height: 60px;
@@ -18,6 +19,7 @@
 
     &__logo-container {
         cursor: pointer;
+        min-width: 180px;
         
         &:hover {
             color: $teal;
@@ -34,11 +36,11 @@
         padding-top: 0.35rem;
     }
 
-    &__user-container {
+    &__menu-container {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        margin-right: 1rem;
+        // padding-right: 1rem;
     }
 
     &__add-friends-icon {
@@ -53,21 +55,90 @@
         }
     }
 
-    &__name {
-        @include m-subheader;
+    &__navmenu {
+        display: none;
+        background-color: white;
+        position: absolute;
+        margin-top: 52px;
+        margin-right: -1rem;
+        width: 100vw;
+        height: 8rem;
+
+        @include tablet {
+            all: unset;
+        }
+
+        &--show {
+            display: block;
+        }
+    }
+
+    &__navlist {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        
+        @include desktop {
+            align-items: flex-start;
+        }
+    }
+
+    &__list-item {
+        list-style-type: none;
+        @include m-body;
         cursor: pointer;
+        margin: 0.25rem 0;
+
+        @include tablet {
+            margin: unset;
+        }
 
         &:hover {
             color: $teal;
         }
+
+        &--name {
+            @include m-subheader;
+        }
     }
 
-    &__logout {
-        @include m-body;
-        cursor: pointer;
+    &__hamburger-container {
+        @include tablet {
+            display: none;
+        }
+    }
+}
 
-        &:hover {
-            color: $teal;
+.hamburger {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    z-index: 0;
+    cursor: pointer;
+
+    &__line {
+        width: 100%;
+        height: 0.25rem;
+        border-radius: 10px;
+        background-color: $teal;
+        transform-origin: 1px;
+        transition: all 0.3s linear;
+
+        &--1 {
+            transform: rotate(45deg);
+        }
+
+        &--2 {
+            opacity: 0;
+        }
+
+        &--3 {
+            transform: rotate(-45deg);
         }
     }
 }

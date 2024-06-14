@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -7,18 +7,47 @@ import ItemList from "../../components/ItemList/ItemList";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
 import AddItemModal from "../../components/AddItemModal/AddItemModal";
 import ItemDetailsModal from "../../components/ItemDetailsModal/ItemDetailsModal";
+import EditItemModal from "../../components/EditItemModal/EditItemModal";
 import hanger from "../../assets/icons/clothes-hanger.png";
 
 const ClosetPage = ({ user }) => {
     const [ items, setItems ] = useState([]);
     const [ userName, setUserName ] = useState("");
     const [ addModalOpen, setAddModalOpen ] = useState(false);
+    const [ editModalOpen, setEditModalOpen ] = useState(false);
     const [ itemModalOpen, setItemModalOpen ] = useState(false);
     const [ selectedItem, setSelectedItem ] = useState("");
     const [ authorized, setAuthorized ] = useState(false);
 
     const { userId } = useParams();
-    
+    const handleOpenAddModal = (event) => {
+        setAddModalOpen(true);
+    };
+  
+    const handleCloseAddModal = useCallback (() => {
+        setAddModalOpen(false);
+    });
+
+    const handleOpenEditModal = (event) => {
+        const id = event.currentTarget.id;
+        setSelectedItem(id);
+        setEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setEditModalOpen(false);
+    };
+
+    const handleOpenItemModal = (event) => {
+        const id = event.currentTarget.id;
+        setSelectedItem(id);
+        setItemModalOpen(true);
+    };
+
+    const handleCloseItemModal = () => {
+        setItemModalOpen(false);
+    };
+
     useEffect (() => {
         const fetchUserItems = async () => {
             try {
@@ -39,7 +68,7 @@ const ClosetPage = ({ user }) => {
         }
 
         fetchUserItems();
-    }, [userId]);
+    }, [userId, editModalOpen]);
 
 
     useEffect (() => {
@@ -59,25 +88,6 @@ const ClosetPage = ({ user }) => {
         fetchUserName();
     }, [userId]);
 
-
-    const handleOpenAddModal = (event) => {
-        setAddModalOpen(true);
-    };
-  
-    const handleCloseAddModal = () => {
-        setAddModalOpen(false);
-    };
-
-    const handleOpenItemModal = (event) => {
-        const id = event.currentTarget.id;
-        setSelectedItem(id);
-        setItemModalOpen(true);
-    };
-
-    const handleCloseItemModal = () => {
-        setItemModalOpen(false);
-    };
-
     if (!authorized) {
         return (
             <div className="unauthorized">
@@ -90,11 +100,19 @@ const ClosetPage = ({ user }) => {
     return (
         <div className="closet">
             {Number(userId) === user.id ? 
-                <AddItemModal
-                    isOpen={addModalOpen}
-                    onClose={handleCloseAddModal}
-                    user={user}
-                /> :
+                <>
+                    <AddItemModal
+                        isOpen={addModalOpen}
+                        onClose={handleCloseAddModal}
+                        user={user}
+                    />
+                    <EditItemModal
+                        isOpen={editModalOpen}
+                        onClose={handleCloseEditModal}
+                        itemId={selectedItem}
+                        user={user}
+                    />
+                </> :
                 <ItemDetailsModal
                     isOpen={itemModalOpen}
                     onClose={handleCloseItemModal}
@@ -129,7 +147,7 @@ const ClosetPage = ({ user }) => {
                 </div> :
                 <ItemList
                     data={items}
-                    handleOpenItemModal={handleOpenItemModal}
+                    handleOpenItemModal={Number(userId) === user.id ? handleOpenEditModal : handleOpenItemModal}
                 />
             }
         </div>

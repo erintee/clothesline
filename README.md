@@ -13,18 +13,18 @@ ClothesLine is made for friends, families, and small communities who want to bui
 ### Features
 
 <p style="text-align: center">
-  <img src="./readme-images/login.jpg" width="45%" style="margin: 0 0.5rem"/>
-  <img src="./readme-images/dashboard.jpg" width="45%" style="margin: 0 0.5rem"/> 
+  <img src="./readme-images/dashboard.png" width="45%" style="margin: 0 0.5rem"/>
+  <img src="./readme-images/requests.png" width="45%" style="margin: 0 0.5rem"/> 
 </p>
 
 <p style="text-align: center">
-  <img src="./readme-images/requests.jpg" width="45%" style="margin: 0 0.5rem" />
-  <img src="./readme-images/item-details.jpg" width="45%" style="margin: 0 0.5rem" /> 
+  <img src="./readme-images/friends.png" width="45%" style="margin: 0 0.5rem" />
+  <img src="./readme-images/my-closet.png" width="45%" style="margin: 0 0.5rem" /> 
 </p>
 
 <p style="text-align: center">
-  <img src="./readme-images/explore.jpg" width="45%" style="margin: 0 0.5rem" /> 
-  <img src="./readme-images/my-closet.jpg" width="45%" style="margin: 0 0.5rem" />
+  <img src="./readme-images/explore.png" width="45%" style="margin: 0 0.5rem" /> 
+  <img src="./readme-images/request-details.png" width="45%" style="margin: 0 0.5rem" />
 </p>
 
 ## Installation
@@ -177,6 +177,31 @@ Response:
   "image": "wool-coat.png",
   "user_id": 3,
   "first_name": "Evelyn"
+}
+```
+
+**PUT /items/:itemId**
+- Edit an item
+
+Parameters:
+- item id
+- title
+- type
+- colour
+- size
+- image
+- JWT
+
+Response:
+```
+{
+  "id": 1,
+  "user_id": 25,
+  "title": "Red rain jacket",
+  "type": "jacket",
+  "colour": "red",
+  "size": "M/8/28",
+  "image": "new-image.jpg",
 }
 ```
 ---

@@ -47,7 +47,9 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
     }
 
     setStartDateError(false);
-    setStartDate(date);
+    const sqlDate = date.toISOString().slice(0, 19);
+    console.log(sqlDate)
+    setStartDate(sqlDate);
   }
 
   const handleChangeEnd = (date) => {
@@ -73,14 +75,18 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
     try {
       const token = localStorage.getItem("authToken");
       
+      const sqlStartDate = startDate.toISOString().slice(0, 19);
+      const sqlEndDate = endDate.toISOString().slice(0, 19);
+
+
       const body = {
         "user1": user.id,
         "user2": item.user_id,
-        "requestStart": startDate,
-        "requestEnd": endDate,
+        "requestStart": sqlStartDate,
+        "requestEnd": sqlEndDate,
         "message": message
       }
-
+      console.log("line 83:", body);
       await axios.post(`${BASE_URL}/requests/${id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,

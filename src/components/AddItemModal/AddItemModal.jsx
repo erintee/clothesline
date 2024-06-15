@@ -31,6 +31,8 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
         setType("");
         setColour("");
         setSize("");
+        setImage("");
+        setFilename("");
     }
 
     // Handle manual clear on button click
@@ -179,6 +181,7 @@ const AddItemModal = ({ isOpen, onClose, user }) => {
                             className="form__input form__input--image"
                             type="file" 
                             name="image"
+                            value={filename}
                             id="image" 
                             onChange={(e) => {
                                 setImage(e.target.files[0])

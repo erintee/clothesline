@@ -68,7 +68,7 @@ const ClosetPage = ({ user }) => {
         }
 
         fetchUserItems();
-    }, [userId, editModalOpen]);
+    }, [userId, editModalOpen, addModalOpen]);
 
 
     useEffect (() => {

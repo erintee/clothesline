@@ -47,9 +47,7 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
     }
 
     setStartDateError(false);
-    const sqlDate = date.toISOString().slice(0, 19);
-    console.log(sqlDate)
-    setStartDate(sqlDate);
+    setStartDate(date);
   }
 
   const handleChangeEnd = (date) => {
@@ -86,13 +84,14 @@ export default function ItemDetailsModal ({ isOpen, onClose, itemId, user }) {
         "requestEnd": sqlEndDate,
         "message": message
       }
-      console.log("line 83:", body);
+
       await axios.post(`${BASE_URL}/requests/${id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       });
       setMessage("");
+
     } catch (error) {
       console.error('Could not send request', error)
     }
